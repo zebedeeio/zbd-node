@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "target": "es2020",
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "checkJs": true,
+    "allowJs": true,
+    "declarationMap": true,
+    "declaration": true,
+    "rootDir": "./src",
+    "sourceMap": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "examples/*",
+    "scripts/*"
+  ]
+}
