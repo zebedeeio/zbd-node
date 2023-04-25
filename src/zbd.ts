@@ -50,12 +50,11 @@ class zbd {
       (response: any) => response.data,
       (error: any) => {
         console.log({ error });
-        return error;
-        // if (error.response) {
-        //   throw new Error(error.response.data);
-        // } else {
-        //   throw new Error(error.message);
-        // }
+        if (error.response) {
+          throw new Error(error.response.data);
+        } else {
+          throw new Error(error.message);
+        }
       }
     );
   }
