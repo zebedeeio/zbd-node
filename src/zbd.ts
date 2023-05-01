@@ -1,6 +1,5 @@
-import axios from 'axios';
-
 import { API_URL, API } from './constants';
+import { postData, getData, patchData } from './utils';
 import {
   ChargeOptionsType,
   KeysendOptionsType,
@@ -32,24 +31,14 @@ import {
 class zbd {
   apiKey: any;
   apiBaseUrl: any;
-  axiosClient: any;  
+  apiCoreHeaders: any;  
 
   constructor(apiKey: any) {
     this.apiKey = apiKey;
     this.apiBaseUrl = API_URL;
-
-    this.axiosClient = axios.create({
-      baseURL: this.apiBaseUrl,
-      headers: {
-        apikey: apiKey,
-        'Content-Type': 'application/json',
-      },
-    });
-
-    this.axiosClient.interceptors.response.use(
-      (response: any) => response,
-      (error: any) => error.response,
-    );
+    this.apiCoreHeaders = {
+      apikey: apiKey,
+    };
   }
 
   async createCharge(options: ChargeOptionsType) {
@@ -61,17 +50,18 @@ class zbd {
         description,
         callbackUrl,
       } = options;
-  
-      const response: ChargeDataResponseType = await this.axiosClient.post(
-        API.CHARGES_ENDPOINT,
-        {
+
+      const response = await postData({
+        url: `${API_URL}${API.CHARGES_ENDPOINT}`,
+        headers: { ...this.apiCoreHeaders },
+        body: {
           amount,
           expiresIn,
           internalId,
           description,
           callbackUrl,
         },
-      );
+      });
   
       return response;
     } catch (error: any) {
@@ -81,17 +71,18 @@ class zbd {
 
   async getCharge(chargeId: string) {
     try {
-      const response: ChargeDataResponseType = await this.axiosClient.get(
-        `${API.CHARGES_ENDPOINT}/${chargeId}`
-      );
-  
+      const response = await getData({
+        url: `${API_URL}${API.CHARGES_ENDPOINT}/${chargeId}`,
+        headers: { ...this.apiCoreHeaders },
+      });
+        
       return response;
     } catch (error: any) {
       throw error;
     }
   }
 
-  async createWithdrawalRequest(options: WithdrawalRequestOptionsType) {
+  async createWithdrawalRequest(options: WithdrawalRequestOptionsType) {    
     try {
       const {
         amount,
@@ -100,17 +91,18 @@ class zbd {
         callbackUrl,
         description,
       } = options;
-  
-      const response: WithdrawalRequestDataResponseType = await this.axiosClient.post(
-        API.WITHDRAWAL_REQUESTS_ENDPOINT,
-        {
+
+      const response = await postData({
+        url: `${API_URL}${API.WITHDRAWAL_REQUESTS_ENDPOINT}`,
+        headers: { ...this.apiCoreHeaders },
+        body: {
           amount,
           expiresIn,
           internalId,
           callbackUrl,
           description,
         },
-      );
+      });
   
       return response;
     } catch (error: any) {
@@ -120,21 +112,23 @@ class zbd {
 
   async getWithdrawalRequest(withdrawalRequestId: string) {
     try {
-      const response: WithdrawalRequestDataResponseType = await this.axiosClient.get(
-        `${API.WITHDRAWAL_REQUESTS_ENDPOINT}/${withdrawalRequestId}`
-      );
-  
+      const response = await getData({
+        url: `${API_URL}${API.WITHDRAWAL_REQUESTS_ENDPOINT}/${withdrawalRequestId}`,
+        headers: { ...this.apiCoreHeaders },
+      });
+        
       return response;
     } catch (error: any) {
       throw error;
     }
   }
 
-  async validateLightningAddress(lightningAddress: string) {
+  async validateLightningAddress(lightningAddress: string) {    
     try {
-      const response: ValidateLightningAddressDataResponseType = await this.axiosClient.get(
-        `${API.VALIDATE_LN_ADDRESS_ENDPOINT}/${lightningAddress}`,
-      );
+      const response = await getData({
+        url: `${API_URL}${API.VALIDATE_LN_ADDRESS_ENDPOINT}/${lightningAddress}`,
+        headers: { ...this.apiCoreHeaders },
+      });
   
       return response;
     } catch (error: any) {
@@ -142,7 +136,7 @@ class zbd {
     }
   }
 
-  async sendLightningAddressPayment(options: SendLightningAddressPaymentOptionsType) {
+  async sendLightningAddressPayment(options: SendLightningAddressPaymentOptionsType) {    
     try {
       const {
         amount,
@@ -151,17 +145,18 @@ class zbd {
         internalId,
         callbackUrl,
       } = options;
-  
-      const response: SendLightningAddressPaymentDataResponseType = await this.axiosClient.post(
-        API.SEND_LN_ADDRESS_PAYMENT_ENDPOINT,
-        {
+
+      const response = await postData({
+        url: `${API_URL}${API.SEND_LN_ADDRESS_PAYMENT_ENDPOINT}`,
+        headers: { ...this.apiCoreHeaders },
+        body: {
           amount,
           comment,
           lnAddress,
           internalId,
           callbackUrl,
         },
-      );
+      });
   
       return response;
     } catch (error: any) {
@@ -171,9 +166,10 @@ class zbd {
   
   async getWallet() {
     try {
-      const response: WalletDataResponseType = await this.axiosClient.get(
-        API.WALLET_ENDPOINT,
-      );
+      const response = await getData({
+        url: `${API_URL}${API.WALLET_ENDPOINT}`,
+        headers: { ...this.apiCoreHeaders },
+      });
         
       return response;
     } catch (error: any) {
@@ -181,11 +177,25 @@ class zbd {
     }
   }
 
-  async isSupportedRegion(ipAddress: string) {
+  async isSupportedRegion(ipAddress: string) {    
     try {
-      const response: SupportedRegionDataResponseType = await this.axiosClient.get(
-        `${API.IS_SUPPORTED_REGION_ENDPOINT}/${ipAddress}`,
-      );
+      const response = await getData({
+        url: `${API_URL}${API.IS_SUPPORTED_REGION_ENDPOINT}/${ipAddress}`,
+        headers: { ...this.apiCoreHeaders },
+      });
+        
+      return response;
+    } catch (error: any) {
+      throw error;
+    }
+  }
+
+  async fetchZBDProdIps() {    
+    try {
+      const response = await getData({
+        url: `${API_URL}${API.FETCH_ZBD_PROD_IPS_ENDPOINT}`,
+        headers: { ...this.apiCoreHeaders },
+      });
   
       return response;
     } catch (error: any) {
@@ -193,11 +203,12 @@ class zbd {
     }
   }
 
-  async fetchZBDProdIps() {
+  async btcUsdExchangeRate() {    
     try {
-      const response: ProdIPSDataResponseType = await this.axiosClient.get(
-        API.FETCH_ZBD_PROD_IPS_ENDPOINT,
-      );
+      const response = await getData({
+        url: `${API_URL}${API.BTCUSD_PRICE_TICKER_ENDPOINT}`,
+        headers: { ...this.apiCoreHeaders },
+      });
   
       return response;
     } catch (error: any) {
@@ -205,59 +216,49 @@ class zbd {
     }
   }
 
-  async btcUsdExchangeRate() {
-    try {
-      const response: BTCUSDDataResponseType = await this.axiosClient.get(
-        API.BTCUSD_PRICE_TICKER_ENDPOINT,
-      );
-  
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
-  }
-
-  async internalTransfer(options: InternalTransferOptionsType) {
+  async internalTransfer(options: InternalTransferOptionsType) {    
     try {
       const {
         amount,
         receiverWalletId,
       } = options;
   
-      const response: InternalTransferDataResponseType = await this.axiosClient.post(
-        API.INTERNAL_TRANSFER_ENDPOINT,
-        {
+      const response = await postData({
+        url: `${API_URL}${API.INTERNAL_TRANSFER_ENDPOINT}`,
+        headers: { ...this.apiCoreHeaders },
+        body: {
           amount,
           receiverWalletId,
-        }
-      );
-  
+        },
+      });
+
       return response;
     } catch (error: any) {
       throw error;
     }
   }
 
-  async sendKeysendPayment(options: KeysendOptionsType) {
+  async sendKeysendPayment(options: KeysendOptionsType) {    
     try {
       const {
         amount,
         pubkey,
-        tlvRecords,
         metadata,
+        tlvRecords,
         callbackUrl,
       } = options;
-  
-      const response: KeysendDataResponseType = await this.axiosClient.post(
-        API.KEYSEND_PAYMENT_ENDPOINT,
-        {
+
+      const response = await postData({
+        url: `${API_URL}${API.KEYSEND_PAYMENT_ENDPOINT}`,
+        headers: { ...this.apiCoreHeaders },
+        body: {
           amount,
           pubkey,
-          tlvRecords,
           metadata,
+          tlvRecords,
           callbackUrl,
         },
-      );
+      });
   
       return response;
     } catch (error: any) {
@@ -265,26 +266,27 @@ class zbd {
     }
   }
 
-  async payCharge(options: SendPaymentOptionsType) {
+  async payCharge(options: SendPaymentOptionsType) {    
     try {
       const {
+        amount,
         invoice,
+        internalId,
         description,
         callbackUrl,
-        internalId,
-        amount,
       } = options;
 
-      const response: InvoicePaymentDataResponseType = await this.axiosClient.post(
-        API.PAYMENTS_ENDPOINT,
-        {
+      const response = await postData({
+        url: `${API_URL}${API.PAYMENTS_ENDPOINT}`,
+        headers: { ...this.apiCoreHeaders },
+        body: {
+          amount,
           invoice,
+          internalId,
           description,
           callbackUrl,
-          internalId,
-          amount,
         },
-      );
+      });
 
       return response; 
     } catch (error: any) {
@@ -292,11 +294,12 @@ class zbd {
     }
   }
 
-  async getPayment(paymentId: string) {
+  async getPayment(paymentId: string) {    
     try {
-      const response: InvoicePaymentDataResponseType = await this.axiosClient.get(
-        `${API.PAYMENTS_ENDPOINT}/${paymentId}`,
-      );
+      const response = await getData({
+        url: `${API_URL}${API.PAYMENTS_ENDPOINT}/${paymentId}`,
+        headers: { ...this.apiCoreHeaders },
+      });
   
       return response;
     } catch (error: any) {
@@ -304,22 +307,23 @@ class zbd {
     }
   }
 
-  async sendGamertagPayment(options: SendGamertagPaymentOptionsType) {
+  async sendGamertagPayment(options: SendGamertagPaymentOptionsType) {    
     try {
       const {
-        gamertag,
         amount,
+        gamertag,
         description,
       } = options;
-  
-      const response: KeysendDataResponseType = await this.axiosClient.post(
-        API.SEND_GAMERTAG_PAYMENT_ENDPOINT, 
-        {
-          gamertag,
+
+      const response = await postData({
+        url: `${API_URL}${API.SEND_GAMERTAG_PAYMENT_ENDPOINT}`,
+        headers: { ...this.apiCoreHeaders },
+        body: {
           amount,
+          gamertag,
           description,
         },
-      );
+      });
   
       return response;
     } catch (error: any) {
@@ -327,11 +331,12 @@ class zbd {
     }
   }
 
-  async fetchGamertagTransaction(transactionId: string) {
+  async fetchGamertagTransaction(transactionId: string) {    
     try {
-      const response: GamertagTransactionDataResponseType = await this.axiosClient.get(
-        `${API.FETCH_GAMERTAG_PAYMENT_ENDPOINT}/${transactionId}`,
-      );
+      const response = await getData({
+        url: `${API_URL}${API.FETCH_GAMERTAG_PAYMENT_ENDPOINT}/${transactionId}`,
+        headers: { ...this.apiCoreHeaders },
+      });
   
       return response;
     } catch (error: any) {
@@ -339,23 +344,25 @@ class zbd {
     }
   }
 
-  async fetchUserIdByGamertag(gamertag: string) {
+  async fetchUserIdByGamertag(gamertag: string) {    
     try {
-      const response: FetchUserIdByGamertagDataResponseType = await this.axiosClient.get(
-        `${API.FETCH_USERID_FROM_GAMERTAG_ENDPOINT}/${gamertag}`,
-      );
-  
+      const response = await getData({
+        url: `${API_URL}${API.FETCH_USERID_FROM_GAMERTAG_ENDPOINT}/${gamertag}`,
+        headers: { ...this.apiCoreHeaders },
+      });
+
       return response;
     } catch (error: any) {
       throw error;
     }
   }
 
-  async fetchGamertagByUserId(userId: string) {
+  async fetchGamertagByUserId(userId: string) {    
     try {
-      const response: FetchGamertagByUserIdDataResponseType = await this.axiosClient.get(
-        `${API.FETCH_GAMERTAG_FROM_USERID_ENDPOINT}/${userId}`,
-      );
+      const response = await getData({
+        url: `${API_URL}${API.FETCH_GAMERTAG_FROM_USERID_ENDPOINT}/${userId}`,
+        headers: { ...this.apiCoreHeaders },
+      });
   
       return response;
     } catch (error: any) {
@@ -363,34 +370,36 @@ class zbd {
     }
   }
 
-   async createGamertagCharge(options: FetchChargeFromGamertagOptionsType) {
+   async createGamertagCharge(options: FetchChargeFromGamertagOptionsType) {    
     try {
       const {
         amount,
         gamertag,
+        internalId,
         description,
         callbackUrl,
-        internalId,
       } = options;
-  
-      const response: FetchChargeFromGamertagDataResponseType = await this.axiosClient.post(
-        API.FETCH_CHARGE_FROM_GAMERTAG_ENDPOINT,
-        {
+
+
+      const response = await postData({
+        url: `${API_URL}${API.FETCH_CHARGE_FROM_GAMERTAG_ENDPOINT}`,
+        headers: { ...this.apiCoreHeaders },
+        body: {
           amount,
           gamertag,
+          internalId,
           description,
           callbackUrl,
-          internalId,
         },
-      );
-  
+      });
+
       return response;
     } catch (error: any) {
       throw error;
     }
   }
 
-  async createStaticCharge(options: StaticChargeOptionsType) {
+  async createStaticCharge(options: StaticChargeOptionsType) {    
     try {
       const {
         allowedSlots,
@@ -401,19 +410,20 @@ class zbd {
         callbackUrl,
         successMessage,
       } = options;
-  
-      const response: StaticChargeDataResponseType = await this.axiosClient.post(
-        API.STATIC_CHARGES_ENDPOINT,
-        {
-          allowedSlots,
+
+      const response = await postData({
+        url: `${API_URL}${API.STATIC_CHARGES_ENDPOINT}`,
+        headers: { ...this.apiCoreHeaders },
+        body: {
           minAmount,
           maxAmount,
-          description,
           internalId,
           callbackUrl,
+          description,
+          allowedSlots,
           successMessage,
         },
-      );
+      });
   
       return response;
     } catch (error: any) {
@@ -421,12 +431,13 @@ class zbd {
     }
   }
 
-  async updateStaticCharge(staticChargeId: string, updates: StaticChargeOptionsType) {
+  async updateStaticCharge(staticChargeId: string, updates: StaticChargeOptionsType) {    
     try {
-      const response: StaticChargeDataResponseType = await this.axiosClient.patch(
-        `${API.STATIC_CHARGES_ENDPOINT}/${staticChargeId}`,
-        updates,
-      );
+      const response = await patchData({
+        url: `${API_URL}${API.STATIC_CHARGES_ENDPOINT}/${staticChargeId}`,
+        headers: { ...this.apiCoreHeaders },
+        body: updates,
+      });
   
       return response;
     } catch (error: any) {
@@ -434,11 +445,12 @@ class zbd {
     }
   }
 
-  async getStaticCharge(staticChargeId: string) {
+  async getStaticCharge(staticChargeId: string) {    
     try {
-      const response: StaticChargeDataResponseType = await this.axiosClient.get(
-        `${API.STATIC_CHARGES_ENDPOINT}/${staticChargeId}`,
-      );
+      const response = await getData({
+        url: `${API_URL}${API.STATIC_CHARGES_ENDPOINT}/${staticChargeId}`,
+        headers: { ...this.apiCoreHeaders },
+      });
   
       return response;
     } catch (error: any) {
