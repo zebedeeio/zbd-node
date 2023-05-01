@@ -1,6 +1,6 @@
 {
   "name": "@zbd/node",
-  "version": "0.5.14",
+  "version": "0.5.15",
   "description": "ZEBEDEE NodeJS SDK",
   "author": "ZEBEDEE",
   "license": "MIT",
