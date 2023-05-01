@@ -70,8 +70,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -83,8 +82,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -111,8 +109,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -124,8 +121,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -137,8 +133,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -193,8 +188,7 @@ class zbd {
         
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -206,8 +200,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -219,8 +212,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -232,8 +224,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -254,8 +245,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -282,8 +272,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -310,8 +299,7 @@ class zbd {
 
       return response; 
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -323,8 +311,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -347,8 +334,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -360,8 +346,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -373,8 +358,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -386,8 +370,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -414,8 +397,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -446,8 +428,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -460,8 +441,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 
@@ -473,8 +453,7 @@ class zbd {
   
       return response;
     } catch (error: any) {
-      console.log({ error });
-      throw new Error(error);
+      throw error;
     }
   }
 }
