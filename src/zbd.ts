@@ -166,6 +166,7 @@ class zbd {
       return response;
     } catch (error: any) {
       console.log({ error });
+      return error;
       throw new Error(error);
     }
   }
