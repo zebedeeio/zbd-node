@@ -29,433 +29,333 @@ import {
 } from './types';
 
 class zbd {
-  apiKey: any;
   apiBaseUrl: any;
   apiCoreHeaders: any;  
 
   constructor(apiKey: any) {
-    this.apiKey = apiKey;
     this.apiBaseUrl = API_URL;
-    this.apiCoreHeaders = {
-      apikey: apiKey,
-    };
+    this.apiCoreHeaders = { apikey: apiKey };
   }
 
   async createCharge(options: ChargeOptionsType) {
-    try {
-      const {
+    const {
+      amount,
+      expiresIn,
+      internalId,
+      description,
+      callbackUrl,
+    } = options;
+
+    const response = await postData({
+      url: `${API_URL}${API.CHARGES_ENDPOINT}`,
+      headers: { ...this.apiCoreHeaders },
+      body: {
         amount,
         expiresIn,
         internalId,
         description,
         callbackUrl,
-      } = options;
+      },
+    });
 
-      const response = await postData({
-        url: `${API_URL}${API.CHARGES_ENDPOINT}`,
-        headers: { ...this.apiCoreHeaders },
-        body: {
-          amount,
-          expiresIn,
-          internalId,
-          description,
-          callbackUrl,
-        },
-      });
-  
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    return response;
   }
 
   async getCharge(chargeId: string) {
-    try {
-      const response = await getData({
-        url: `${API_URL}${API.CHARGES_ENDPOINT}/${chargeId}`,
-        headers: { ...this.apiCoreHeaders },
-      });
-        
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    const response = await getData({
+      url: `${API_URL}${API.CHARGES_ENDPOINT}/${chargeId}`,
+      headers: { ...this.apiCoreHeaders },
+    });
+      
+    return response;
   }
 
   async createWithdrawalRequest(options: WithdrawalRequestOptionsType) {    
-    try {
-      const {
+    const {
+      amount,
+      expiresIn,
+      internalId,
+      callbackUrl,
+      description,
+    } = options;
+
+    const response = await postData({
+      url: `${API_URL}${API.WITHDRAWAL_REQUESTS_ENDPOINT}`,
+      headers: { ...this.apiCoreHeaders },
+      body: {
         amount,
         expiresIn,
         internalId,
         callbackUrl,
         description,
-      } = options;
+      },
+    });
 
-      const response = await postData({
-        url: `${API_URL}${API.WITHDRAWAL_REQUESTS_ENDPOINT}`,
-        headers: { ...this.apiCoreHeaders },
-        body: {
-          amount,
-          expiresIn,
-          internalId,
-          callbackUrl,
-          description,
-        },
-      });
-  
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    return response;
   }
 
   async getWithdrawalRequest(withdrawalRequestId: string) {
-    try {
-      const response = await getData({
-        url: `${API_URL}${API.WITHDRAWAL_REQUESTS_ENDPOINT}/${withdrawalRequestId}`,
-        headers: { ...this.apiCoreHeaders },
-      });
-        
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    const response = await getData({
+      url: `${API_URL}${API.WITHDRAWAL_REQUESTS_ENDPOINT}/${withdrawalRequestId}`,
+      headers: { ...this.apiCoreHeaders },
+    });
+      
+    return response;
   }
 
   async validateLightningAddress(lightningAddress: string) {    
-    try {
-      const response = await getData({
-        url: `${API_URL}${API.VALIDATE_LN_ADDRESS_ENDPOINT}/${lightningAddress}`,
-        headers: { ...this.apiCoreHeaders },
-      });
-  
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    const response = await getData({
+      url: `${API_URL}${API.VALIDATE_LN_ADDRESS_ENDPOINT}/${lightningAddress}`,
+      headers: { ...this.apiCoreHeaders },
+    });
+
+    return response;
   }
 
   async sendLightningAddressPayment(options: SendLightningAddressPaymentOptionsType) {    
-    try {
-      const {
+    const {
+      amount,
+      comment,
+      lnAddress,
+      internalId,
+      callbackUrl,
+    } = options;
+
+    const response = await postData({
+      url: `${API_URL}${API.SEND_LN_ADDRESS_PAYMENT_ENDPOINT}`,
+      headers: { ...this.apiCoreHeaders },
+      body: {
         amount,
         comment,
         lnAddress,
         internalId,
         callbackUrl,
-      } = options;
+      },
+    });
 
-      const response = await postData({
-        url: `${API_URL}${API.SEND_LN_ADDRESS_PAYMENT_ENDPOINT}`,
-        headers: { ...this.apiCoreHeaders },
-        body: {
-          amount,
-          comment,
-          lnAddress,
-          internalId,
-          callbackUrl,
-        },
-      });
-  
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    return response;
   }
   
   async getWallet() {
-    try {
-      const response = await getData({
-        url: `${API_URL}${API.WALLET_ENDPOINT}`,
-        headers: { ...this.apiCoreHeaders },
-      });
-        
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    const response = await getData({
+      url: `${API_URL}${API.WALLET_ENDPOINT}`,
+      headers: { ...this.apiCoreHeaders },
+    });
+      
+    return response;
   }
 
   async isSupportedRegion(ipAddress: string) {    
-    try {
-      const response = await getData({
-        url: `${API_URL}${API.IS_SUPPORTED_REGION_ENDPOINT}/${ipAddress}`,
-        headers: { ...this.apiCoreHeaders },
-      });
-        
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    const response = await getData({
+      url: `${API_URL}${API.IS_SUPPORTED_REGION_ENDPOINT}/${ipAddress}`,
+      headers: { ...this.apiCoreHeaders },
+    });
+      
+    return response;
   }
 
   async fetchZBDProdIps() {    
-    try {
-      const response = await getData({
-        url: `${API_URL}${API.FETCH_ZBD_PROD_IPS_ENDPOINT}`,
-        headers: { ...this.apiCoreHeaders },
-      });
-  
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    const response = await getData({
+      url: `${API_URL}${API.FETCH_ZBD_PROD_IPS_ENDPOINT}`,
+      headers: { ...this.apiCoreHeaders },
+    });
+
+    return response;
   }
 
   async btcUsdExchangeRate() {    
-    try {
-      const response = await getData({
-        url: `${API_URL}${API.BTCUSD_PRICE_TICKER_ENDPOINT}`,
-        headers: { ...this.apiCoreHeaders },
-      });
-  
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    const response = await getData({
+      url: `${API_URL}${API.BTCUSD_PRICE_TICKER_ENDPOINT}`,
+      headers: { ...this.apiCoreHeaders },
+    });
+
+    return response;
   }
 
   async internalTransfer(options: InternalTransferOptionsType) {    
-    try {
-      const {
+    const { amount, receiverWalletId } = options;
+
+    const response = await postData({
+      url: `${API_URL}${API.INTERNAL_TRANSFER_ENDPOINT}`,
+      headers: { ...this.apiCoreHeaders },
+      body: {
         amount,
         receiverWalletId,
-      } = options;
-  
-      const response = await postData({
-        url: `${API_URL}${API.INTERNAL_TRANSFER_ENDPOINT}`,
-        headers: { ...this.apiCoreHeaders },
-        body: {
-          amount,
-          receiverWalletId,
-        },
-      });
+      },
+    });
 
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    return response;
   }
 
   async sendKeysendPayment(options: KeysendOptionsType) {    
-    try {
-      const {
+    const {
+      amount,
+      pubkey,
+      metadata,
+      tlvRecords,
+      callbackUrl,
+    } = options;
+
+    const response = await postData({
+      url: `${API_URL}${API.KEYSEND_PAYMENT_ENDPOINT}`,
+      headers: { ...this.apiCoreHeaders },
+      body: {
         amount,
         pubkey,
         metadata,
         tlvRecords,
         callbackUrl,
-      } = options;
+      },
+    });
 
-      const response = await postData({
-        url: `${API_URL}${API.KEYSEND_PAYMENT_ENDPOINT}`,
-        headers: { ...this.apiCoreHeaders },
-        body: {
-          amount,
-          pubkey,
-          metadata,
-          tlvRecords,
-          callbackUrl,
-        },
-      });
-  
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    return response;
   }
 
   async payCharge(options: SendPaymentOptionsType) {    
-    try {
-      const {
+    const {
+      amount,
+      invoice,
+      internalId,
+      description,
+      callbackUrl,
+    } = options;
+
+    const response = await postData({
+      url: `${API_URL}${API.PAYMENTS_ENDPOINT}`,
+      headers: { ...this.apiCoreHeaders },
+      body: {
         amount,
         invoice,
         internalId,
         description,
         callbackUrl,
-      } = options;
+      },
+    });
 
-      const response = await postData({
-        url: `${API_URL}${API.PAYMENTS_ENDPOINT}`,
-        headers: { ...this.apiCoreHeaders },
-        body: {
-          amount,
-          invoice,
-          internalId,
-          description,
-          callbackUrl,
-        },
-      });
-
-      return response; 
-    } catch (error: any) {
-      throw error;
-    }
+    return response; 
   }
 
   async getPayment(paymentId: string) {    
-    try {
-      const response = await getData({
-        url: `${API_URL}${API.PAYMENTS_ENDPOINT}/${paymentId}`,
-        headers: { ...this.apiCoreHeaders },
-      });
-  
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    const response = await getData({
+      url: `${API_URL}${API.PAYMENTS_ENDPOINT}/${paymentId}`,
+      headers: { ...this.apiCoreHeaders },
+    });
+
+    return response;
   }
 
   async sendGamertagPayment(options: SendGamertagPaymentOptionsType) {    
-    try {
-      const {
+    const { amount, gamertag, description } = options;
+
+    const response = await postData({
+      url: `${API_URL}${API.SEND_GAMERTAG_PAYMENT_ENDPOINT}`,
+      headers: { ...this.apiCoreHeaders },
+      body: {
         amount,
         gamertag,
         description,
-      } = options;
+      },
+    });
 
-      const response = await postData({
-        url: `${API_URL}${API.SEND_GAMERTAG_PAYMENT_ENDPOINT}`,
-        headers: { ...this.apiCoreHeaders },
-        body: {
-          amount,
-          gamertag,
-          description,
-        },
-      });
-  
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    return response;
   }
 
   async fetchGamertagTransaction(transactionId: string) {    
-    try {
-      const response = await getData({
-        url: `${API_URL}${API.FETCH_GAMERTAG_PAYMENT_ENDPOINT}/${transactionId}`,
-        headers: { ...this.apiCoreHeaders },
-      });
-  
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    const response = await getData({
+      url: `${API_URL}${API.FETCH_GAMERTAG_PAYMENT_ENDPOINT}/${transactionId}`,
+      headers: { ...this.apiCoreHeaders },
+    });
+
+    return response;
   }
 
   async fetchUserIdByGamertag(gamertag: string) {    
-    try {
-      const response = await getData({
-        url: `${API_URL}${API.FETCH_USERID_FROM_GAMERTAG_ENDPOINT}/${gamertag}`,
-        headers: { ...this.apiCoreHeaders },
-      });
+    const response = await getData({
+      url: `${API_URL}${API.FETCH_USERID_FROM_GAMERTAG_ENDPOINT}/${gamertag}`,
+      headers: { ...this.apiCoreHeaders },
+    });
 
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    return response;
   }
 
   async fetchGamertagByUserId(userId: string) {    
-    try {
-      const response = await getData({
-        url: `${API_URL}${API.FETCH_GAMERTAG_FROM_USERID_ENDPOINT}/${userId}`,
-        headers: { ...this.apiCoreHeaders },
-      });
-  
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    const response = await getData({
+      url: `${API_URL}${API.FETCH_GAMERTAG_FROM_USERID_ENDPOINT}/${userId}`,
+      headers: { ...this.apiCoreHeaders },
+    });
+
+    return response;
   }
 
    async createGamertagCharge(options: FetchChargeFromGamertagOptionsType) {    
-    try {
-      const {
+    const {
+      amount,
+      gamertag,
+      internalId,
+      description,
+      callbackUrl,
+    } = options;
+
+    const response = await postData({
+      url: `${API_URL}${API.FETCH_CHARGE_FROM_GAMERTAG_ENDPOINT}`,
+      headers: { ...this.apiCoreHeaders },
+      body: {
         amount,
         gamertag,
         internalId,
         description,
         callbackUrl,
-      } = options;
+      },
+    });
 
-
-      const response = await postData({
-        url: `${API_URL}${API.FETCH_CHARGE_FROM_GAMERTAG_ENDPOINT}`,
-        headers: { ...this.apiCoreHeaders },
-        body: {
-          amount,
-          gamertag,
-          internalId,
-          description,
-          callbackUrl,
-        },
-      });
-
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    return response;
   }
 
   async createStaticCharge(options: StaticChargeOptionsType) {    
-    try {
-      const {
-        allowedSlots,
+    const {
+      minAmount,
+      maxAmount,
+      internalId,
+      description,
+      callbackUrl,
+      allowedSlots,
+      successMessage,
+    } = options;
+
+    const response = await postData({
+      url: `${API_URL}${API.STATIC_CHARGES_ENDPOINT}`,
+      headers: { ...this.apiCoreHeaders },
+      body: {
         minAmount,
         maxAmount,
-        description,
         internalId,
         callbackUrl,
+        description,
+        allowedSlots,
         successMessage,
-      } = options;
+      },
+    });
 
-      const response = await postData({
-        url: `${API_URL}${API.STATIC_CHARGES_ENDPOINT}`,
-        headers: { ...this.apiCoreHeaders },
-        body: {
-          minAmount,
-          maxAmount,
-          internalId,
-          callbackUrl,
-          description,
-          allowedSlots,
-          successMessage,
-        },
-      });
-  
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    return response;
   }
 
   async updateStaticCharge(staticChargeId: string, updates: StaticChargeOptionsType) {    
-    try {
-      const response = await patchData({
-        url: `${API_URL}${API.STATIC_CHARGES_ENDPOINT}/${staticChargeId}`,
-        headers: { ...this.apiCoreHeaders },
-        body: updates,
-      });
-  
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    const response = await patchData({
+      url: `${API_URL}${API.STATIC_CHARGES_ENDPOINT}/${staticChargeId}`,
+      headers: { ...this.apiCoreHeaders },
+      body: updates,
+    });
+
+    return response;
   }
 
   async getStaticCharge(staticChargeId: string) {    
-    try {
-      const response = await getData({
-        url: `${API_URL}${API.STATIC_CHARGES_ENDPOINT}/${staticChargeId}`,
-        headers: { ...this.apiCoreHeaders },
-      });
-  
-      return response;
-    } catch (error: any) {
-      throw error;
-    }
+    const response = await getData({
+      url: `${API_URL}${API.STATIC_CHARGES_ENDPOINT}/${staticChargeId}`,
+      headers: { ...this.apiCoreHeaders },
+    });
+
+    return response;
   }
 }
 

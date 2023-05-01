@@ -20,21 +20,27 @@ export async function postData({
   body: any;
   headers?: any;
 }) {
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        ...headers,
-      },
-      body: JSON.stringify(cleanup(body)),
-    });
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      ...headers,
+    },
+    body: JSON.stringify(cleanup(body)),
+  });
 
-    const result = await response.json();
-    console.log("Success:", result);
-  } catch (error) {
-    console.error("Error:", error);
+  if (!response.ok) {
+    const errorBody = await response.json();
+    const error = {
+      status: response.status,
+      message: errorBody.message || 'API request failed',
+    };
+
+    throw error;
   }
+
+  const result = await response.json();
+  return result;
 }
 
 export async function patchData({
@@ -46,21 +52,27 @@ export async function patchData({
   body: any;
   headers?: any;
 }) {
-  try {
-    const response = await fetch(url, {
-      method: "PATCH",
-      headers: {
-        'Content-Type': 'application/json',
-        ...headers,
-      },
-      body: JSON.stringify(cleanup(body)),
-    });
+  const response = await fetch(url, {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/json',
+      ...headers,
+    },
+    body: JSON.stringify(cleanup(body)),
+  });
 
-    const result = await response.json();
-    console.log("Success:", result);
-  } catch (error) {
-    console.error("Error:", error);
+  if (!response.ok) {
+    const errorBody = await response.json();
+    const error = {
+      status: response.status,
+      message: errorBody.message || 'API request failed',
+    };
+
+    throw error;
   }
+
+  const result = await response.json();
+  return result;
 }
 
 export async function getData({
@@ -70,25 +82,24 @@ export async function getData({
   url: string;
   headers?: any;
 }) {
-  try {
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        'Content-Type': 'application/json',
-        ...headers,
-      },
-    });
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json',
+      ...headers,
+    },
+  });
 
-    if (!response.ok) {
-      const errorBody = await response.json();
-      throw new Error(errorBody.message);
-    }
+  if (!response.ok) {
+    const errorBody = await response.json();
+    const error = {
+      status: response.status,
+      message: errorBody.message || 'API request failed',
+    };
 
-    const result = await response.json();
-    console.log("Success:", result);
-    return result;
-  } catch (error) {
-    console.error("Error:", error);
     throw error;
   }
+
+  const result = await response.json();
+  return result;
 }
