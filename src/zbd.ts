@@ -45,14 +45,6 @@ class zbd {
         'Content-Type': 'application/json',
       },
     });
-
-    this.axiosClient.interceptors.response.use(
-      (response: any) => response.data,
-      (error: any) => {
-        console.log({ error });
-        throw new Error(error);
-      }
-    );
   }
 
   async createCharge(options: ChargeOptionsType) {
@@ -126,26 +118,31 @@ class zbd {
   }
 
   async sendLightningAddressPayment(options: SendLightningAddressPaymentOptionsType) {
-    const {
-      amount,
-      comment,
-      lnAddress,
-      internalId,
-      callbackUrl,
-    } = options;
-
-    const response: SendLightningAddressPaymentDataResponseType = await this.axiosClient.post(
-      API.SEND_LN_ADDRESS_PAYMENT_ENDPOINT,
-      {
+    try {
+      const {
         amount,
         comment,
         lnAddress,
         internalId,
         callbackUrl,
-      },
-    );
-
-    return response;
+      } = options;
+  
+      const response: SendLightningAddressPaymentDataResponseType = await this.axiosClient.post(
+        API.SEND_LN_ADDRESS_PAYMENT_ENDPOINT,
+        {
+          amount,
+          comment,
+          lnAddress,
+          internalId,
+          callbackUrl,
+        },
+      );
+  
+      return response;
+    } catch (error: any) {
+      console.log({ error });
+      throw new Error(error);
+    }
   }
 
   async getWallet() {

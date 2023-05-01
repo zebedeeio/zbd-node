@@ -12,7 +12,7 @@ Node.js library for the ZEBEDEE Payments API.
 <br />
 
 [![bitcoin ln payments](https://img.shields.io/badge/Bitcoin%20Lightning-Payments-orange?style=for-the-badge&logo=bitcoin)](https://www.npmjs.com/package/@zbd/node)
-<br/><br/>
+<br/>
 
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/zebedeeio/zbd-node/blob/HEAD/LICENSE.md) [![npm latest package](https://img.shields.io/npm/v/@zbd/node/latest.svg)](https://www.npmjs.com/package/@zbd/node) [![latest build](https://img.shields.io/badge/build-passing-blueviolet)](https://www.npmjs.com/package/@zbd/node) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/zebedeeio/zbd-node/blob/HEAD/CONTRIBUTING.md#pull-requests)
 
