@@ -21,6 +21,10 @@ export interface ChargeOptionsType {
   callbackUrl: string;
 }
 
+export interface DecodeChargeOptionsType {
+  invoice: string;
+}
+
 export interface ChargeDataResponseType {
   data: {
     id: string;
@@ -280,6 +284,13 @@ export interface SendLightningAddressPaymentOptionsType {
   comment: string;
   callbackUrl: string;
   internalId: string;
+}
+
+export interface CreateChargeFromLightningAddressOptionsType {
+  amount: string
+  lnaddress: string
+  lnAddress?: string
+  description: string
 }
 
 export interface InvoicePaymentDataResponseType {

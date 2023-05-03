@@ -7,7 +7,7 @@
 
 <div align="center">
 
-Node.js library for the ZEBEDEE Payments API
+Node.js library for the ZEBEDEE API
 
 <br />
 

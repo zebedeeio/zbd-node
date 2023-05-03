@@ -16,14 +16,14 @@ export const API = {
   // Lightning Address
   SEND_LN_ADDRESS_PAYMENT_ENDPOINT: '/v0/ln-address/send-payment',
   VALIDATE_LN_ADDRESS_ENDPOINT: '/v0/ln-address/validate',
-  FETCH_CHARGE_FROM_LN_ADDRESS_ENDPOINT: '/v0/ln-address/fetch-charge',
+  CREATE_CHARGE_FROM_LN_ADDRESS_ENDPOINT: '/v0/ln-address/fetch-charge',
 
   // ZBD Gamertags
   SEND_GAMERTAG_PAYMENT_ENDPOINT: '/v0/gamertag/send-payment',
-  FETCH_GAMERTAG_PAYMENT_ENDPOINT: '/v0/gamertag/transaction',
-  FETCH_USERID_FROM_GAMERTAG_ENDPOINT: '/v0/user-id/gamertag',
-  FETCH_GAMERTAG_FROM_USERID_ENDPOINT: '/v0/gamertag/user-id',
-  FETCH_CHARGE_FROM_GAMERTAG_ENDPOINT: '/v0/gamertag/charges',
+  GET_GAMERTAG_PAYMENT_ENDPOINT: '/v0/gamertag/transaction',
+  GET_USERID_FROM_GAMERTAG_ENDPOINT: '/v0/user-id/gamertag',
+  GET_GAMERTAG_FROM_USERID_ENDPOINT: '/v0/gamertag/user-id',
+  CREATE_CHARGE_FROM_GAMERTAG_ENDPOINT: '/v0/gamertag/charges',
 
   // Withdrawal Requests
   WITHDRAWAL_REQUESTS_ENDPOINT: '/v0/withdrawal-requests',
@@ -36,6 +36,7 @@ export const API = {
 
   // Utilities
   IS_SUPPORTED_REGION_ENDPOINT: '/v0/is-supported-region',
+  DECODE_INVOICE_ENDPOINT: '/v0/decode-invoice',
   FETCH_ZBD_PROD_IPS_ENDPOINT: '/v0/prod-ips',
   BTCUSD_PRICE_TICKER_ENDPOINT: '/v0/btcusd',
 }    
