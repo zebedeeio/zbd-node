@@ -20,7 +20,7 @@ Node.js library for the ZEBEDEE API
 
 
 <p align="center">
-  <a href="https://zbd-node.dev.zebedee.cloud"><strong>Documentation</strong></a> ·
+  <a href="https://docs.zebedee.io"><strong>Documentation</strong></a> ·
   <a href="https://dashboard.zebedee.io"><strong>Developer Dashboard</strong></a> ·
   <a href="https://playground.dev.zebedee.cloud"><strong>Dev Playground</strong></a> ·
   <a href="https://status.zebedee.io"><strong>API Status</strong></a>
@@ -61,6 +61,8 @@ npm install @zbd/node
 
 ## Available API Methods
 
+Below you can find source code examples of how to use each of the available API methods in the @zbd/node SDK library.
+
 ### sendLightningAddressPayment
 
 ```js
@@ -83,21 +85,6 @@ const data = await zbd.sendLightningAddressPayment(payload);
 // Fetching Wallet Balance
 const data = await zbd.validateLightningAddress('andre@zbd.gg');
 ```
-
-```js
-// Construct payload
-const payload = {
-  amount: "15000",
-  lnAddress: "andre@zbd.gg",
-  comment: "Lightning fast!",
-  internalId: "1b8h1-h1675",
-  callbackUrl: "https://your-domain.com/zbd-callback"
-}
-
-// Sending Lightning Address Payment
-const data = await zbd.sendLightningAddressPayment(payload);
-```
-
 
 ## Full API Reference & Configuration
 
