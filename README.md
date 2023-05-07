@@ -59,7 +59,47 @@ Or if you're a `Yarn` user:
 npm install @zbd/node
 ```
 
-## API Reference & Configuration
+## Available API Methods
+
+### sendLightningAddressPayment
+
+```js
+// Construct payload
+const payload = {
+  amount: "15000",
+  lnAddress: "andre@zbd.gg",
+  comment: "Lightning fast!",
+  internalId: "1b8h1-h1675",
+  callbackUrl: "https://your-domain.com/zbd-callback"
+}
+
+// Sending Lightning Address Payment
+const data = await zbd.sendLightningAddressPayment(payload);
+```
+
+### validateLightningAddress
+
+```js
+// Fetching Wallet Balance
+const data = await zbd.validateLightningAddress('andre@zbd.gg');
+```
+
+```js
+// Construct payload
+const payload = {
+  amount: "15000",
+  lnAddress: "andre@zbd.gg",
+  comment: "Lightning fast!",
+  internalId: "1b8h1-h1675",
+  callbackUrl: "https://your-domain.com/zbd-callback"
+}
+
+// Sending Lightning Address Payment
+const data = await zbd.sendLightningAddressPayment(payload);
+```
+
+
+## Full API Reference & Configuration
 
 [View full documentation and API reference for the @zbd/node library](https://zbd-node.dev.zebedee.cloud).
 
