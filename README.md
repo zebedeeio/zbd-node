@@ -1,11 +1,11 @@
-<h1 align="center">ZEBEDEE Node.js SDK</h1>
+<h1 align='center'>ZEBEDEE Node.js SDK</h1>
 
-<div align="center">
-<img width="100" src="https://zbd-node.dev.zebedee.cloud/zbd-node-logo.png" />
+<div align='center'>
+<img width='100' src='https://zbd-node.dev.zebedee.cloud/zbd-node-logo.png' />
 </div>
 <br />
 
-<div align="center">
+<div align='center'>
 
 Node.js library for the ZEBEDEE API
 
@@ -19,18 +19,18 @@ Node.js library for the ZEBEDEE API
 <br />
 
 
-<p align="center">
-  <a href="https://docs.zebedee.io"><strong>Documentation</strong></a> ·
-  <a href="https://dashboard.zebedee.io"><strong>Developer Dashboard</strong></a> ·
-  <a href="https://playground.dev.zebedee.cloud"><strong>Dev Playground</strong></a> ·
-  <a href="https://status.zebedee.io"><strong>API Status</strong></a>
+<p align='center'>
+  <a href='https://docs.zebedee.io'><strong>Documentation</strong></a> ·
+  <a href='https://dashboard.zebedee.io'><strong>Developer Dashboard</strong></a> ·
+  <a href='https://playground.dev.zebedee.cloud'><strong>Dev Playground</strong></a> ·
+  <a href='https://status.zebedee.io'><strong>API Status</strong></a>
 </p>
 
 </div>
 
 ---
 
-<div align="left">
+<div align='left'>
 <br />
 
 ## Introduction
@@ -68,11 +68,11 @@ Below you can find source code examples of how to use each of the available API 
 ```js
 // Construct payload
 const payload = {
-  amount: "15000",
+  amount: '15000',
   expiresIn: 300,
-  internalId: "1b8h1-h1675",
-  description: "Charge description",
-  callbackUrl: "https://your-domain.com/zbd-callback"
+  internalId: '1b8h1-h1675',
+  description: 'Charge description',
+  callbackUrl: 'https://your-domain.com/zbd-callback'
 }
 
 // Create Charge / Payment Request
@@ -91,7 +91,7 @@ const data = await zbd.getCharge('1907b0fe-789b-4e27-b18a-0c3c0f5cced7');
 ```js
 // Construct payload
 const payload = {
-  invoice: "lnbc2123250n1pjpr2qmpp526234tljpx5756pa2fyj2zrdmn2tnz9rhj54km2s7dv0pap3vtkqhp5extcuyp2x0ydfwnfhrc5cwx8azxeen2g7hxr29464ezvn3k6w2fqcqzpgxqzjcsp5xzelh2w3twt4ysvva2ugu2klurmrl7nk8h46x2hcthf9cvee24jq9qyyssq6an9tjftjymjeklerjmw8cv4ccpsvd2vzuzxn5upt9s37hnw2r0z0n5cd8cqq8jq5ems00tugt5jnw5jn03tr84945nd6j4hsfsu7kqp9hptk2"
+  invoice: 'lnbc2123250n1pjpr2qmpp526234tljpx5756pa2fyj2zrdmn2tnz9rhj54km2s7dv0pap3vtkqhp5extcuyp2x0ydfwnfhrc5cwx8azxeen2g7hxr29464ezvn3k6w2fqcqzpgxqzjcsp5xzelh2w3twt4ysvva2ugu2klurmrl7nk8h46x2hcthf9cvee24jq9qyyssq6an9tjftjymjeklerjmw8cv4ccpsvd2vzuzxn5upt9s37hnw2r0z0n5cd8cqq8jq5ems00tugt5jnw5jn03tr84945nd6j4hsfsu7kqp9hptk2'
 }
 
 // Decode Charge
@@ -103,12 +103,12 @@ const data = await zbd.decodeCharge(payload);
 ```js
 // Construct payload
 const payload = {
-  maxAmount: "20000",
-  minAmount: "10000",
-  internalId: "1b8h1-h1675",
-  description: "Static Charge API Ref",
-  callbackUrl: "https://your-domain.com/zbd-callback"
-  successMessage: "Congratulations your payment was successful!"
+  maxAmount: '20000',
+  minAmount: '10000',
+  internalId: '1b8h1-h1675',
+  description: 'Static Charge API Ref',
+  callbackUrl: 'https://your-domain.com/zbd-callback',
+  successMessage: 'Congratulations your payment was successful!'
 }
 
 // Create Static Charge QR
@@ -127,8 +127,8 @@ const data = await zbd.getCharge('6557a0fe-7a9b-4e27-b18a-0c3c0f5cced7');
 ```js
 // Construct update payload
 const updatePayload = {
-  maxAmount: "5000000",
-  minAmount: "10000",
+  maxAmount: '5000000',
+  minAmount: '10000',
   ...
 }
 
@@ -144,11 +144,11 @@ const data = await zbd.updateStaticCharge(
 ```js
 // Construct payload
 const payload = {
-  amount: "15000",
-  description: "Withdraw QR!",
+  amount: '15000',
+  description: 'Withdraw QR!',
   expiresIn: 300,
-  internalId: "1b8h1-h1675",
-  callbackUrl: "https://your-domain.com/zbd-callback"
+  internalId: '1b8h1-h1675',
+  callbackUrl: 'https://your-domain.com/zbd-callback'
 }
 
 // Create Withdrawal Request 
@@ -167,11 +167,11 @@ const data = await zbd.getWithdrawalRequest('6557a0fe-7a9b-4e27-b18a-0c3c0f5cced
 ```js
 // Construct payload
 const payload = {
-  amount: "15000",
-  lnAddress: "andre@zbd.gg",
-  comment: "Lightning fast!",
-  internalId: "1b8h1-h1675",
-  callbackUrl: "https://your-domain.com/zbd-callback"
+  amount: '15000',
+  lnAddress: 'andre@zbd.gg',
+  comment: 'Lightning fast!',
+  internalId: '1b8h1-h1675',
+  callbackUrl: 'https://your-domain.com/zbd-callback'
 }
 
 // Sending Lightning Address Payment
@@ -190,15 +190,13 @@ const data = await zbd.validateLightningAddress('andre@zbd.gg');
 ```js
 // Construct payload
 const payload = {
-  amount: "15000",
-  lnAddress: "andre@zbd.gg",
-  comment: "Lightning fast!",
-  internalId: "1b8h1-h1675",
-  callbackUrl: "https://your-domain.com/zbd-callback"
+  amount: '15000',
+  lnAddress: 'andre@zbd.gg',
+  description: 'Lightning fast!',
 }
 
-// Sending Lightning Address Payment
-const data = await zbd.sendLightningAddressPayment(payload);
+// Create Charge / Payment Request for given ZBD Gamertag
+const data = await zbd.createChargeFromLightningAddress(payload);
 ```
 
 ### getWallet
@@ -213,8 +211,8 @@ const data = await zbd.getWallet();
 ```js
 // Construct payload
 const payload = {
-  amount: "10000",
-  receiverWalletId: "b994ee02-dc0b-4f14-b99f-1f2d3daa01a6"
+  amount: '10000',
+  receiverWalletId: 'b994ee02-dc0b-4f14-b99f-1f2d3daa01a6'
 }
 
 // Initiate Internal Transfer
@@ -226,9 +224,9 @@ const data = await zbd.internalTransfer(payload);
 ```js
 // Construct payload
 const payload = {
-  amount: "10000",
-  callbackUrl: "https://your-domain.com/zbd-callback"
-  pubkey: "0332d57355d673e217238ce3e4be8491aa6b2a13f95494133ee243e57df1653ace",
+  amount: '10000',
+  callbackUrl: 'https://your-domain.com/zbd-callback',
+  pubkey: '0332d57355d673e217238ce3e4be8491aa6b2a13f95494133ee243e57df1653ace',
 }
 
 // Sending Keysend Payment
@@ -240,10 +238,10 @@ const data = await zbd.sendKeysendPayment(payload);
 ```js
 // Construct payload
 const payload = {
-  description: "Lightning fast!",
-  invoice: "lnbc2123250n1pjpr2qmpp526234tljpx5756pa2fyj2zrdmn2tnz9rhj54km2s7dv0pap3vtkqhp5extcuyp2x0ydfwnfhrc5cwx8azxeen2g7hxr29464ezvn3k6w2fqcqzpgxqzjcsp5xzelh2w3twt4ysvva2ugu2klurmrl7nk8h46x2hcthf9cvee24jq9qyyssq6an9tjftjymjeklerjmw8cv4ccpsvd2vzuzxn5upt9s37hnw2r0z0n5cd8cqq8jq5ems00tugt5jnw5jn03tr84945nd6j4hsfsu7kqp9hptk2"
-  internalId: "1b8h1-h1675",
-  callbackUrl: "https://your-domain.com/zbd-callback"
+  description: 'Lightning fast!',
+  invoice: 'lnbc2123250n1pjpr2qmpp526234tljpx5756pa2fyj2zrdmn2tnz9rhj54km2s7dv0pap3vtkqhp5extcuyp2x0ydfwnfhrc5cwx8azxeen2g7hxr29464ezvn3k6w2fqcqzpgxqzjcsp5xzelh2w3twt4ysvva2ugu2klurmrl7nk8h46x2hcthf9cvee24jq9qyyssq6an9tjftjymjeklerjmw8cv4ccpsvd2vzuzxn5upt9s37hnw2r0z0n5cd8cqq8jq5ems00tugt5jnw5jn03tr84945nd6j4hsfsu7kqp9hptk2',
+  internalId: '1b8h1-h1675',
+  callbackUrl: 'https://your-domain.com/zbd-callback'
 }
 
 // Make Payment
@@ -262,9 +260,9 @@ const data = await zbd.getPayment('6557a0fe-7a9b-4e27-b18a-0c3c0f5cced7');
 ```js
 // Construct payload
 const payload = {
-  amount: "10000",
-  gamertag: "andre"
-  description: "Sending to ZBD Gamertag",
+  amount: '10000',
+  gamertag: 'andre',
+  description: 'Sending to ZBD Gamertag',
 }
 
 // Sending ZBD Gamertag Payment
