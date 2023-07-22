@@ -32,3 +32,18 @@ export interface ChargeOptionsType {
   }
 
   
+  export interface DecodeChargeResponseType {
+    data: {
+      unit: string;
+      status: string;
+      amount: string;
+      createdAt: string;
+      internalId: string;
+      callbackUrl: string;
+      description: string;
+      invoiceRequest: string;
+      invoiceExpiresAt: string;
+      invoiceDescriptionHash: string | null;
+    }
+    success: boolean;
+  }

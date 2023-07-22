@@ -5,5 +5,4 @@ export interface WalletDataResponseType {
       unit: string;
     }
     message: string;
-    success: boolean;
   }

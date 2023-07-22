@@ -32,6 +32,5 @@ export interface StaticChargeOptionsType {
       }
     }
     message: string;
-    success: boolean;
   }
   
