@@ -28,13 +28,13 @@ import {
   ValidateLightningAddressDataResponseType,
   SendLightningAddressPaymentDataResponseType,
   CreateChargeFromLightningAddressOptionsType,
-} from './types';
+} from './types/index';
 
 class zbd {
-  apiBaseUrl: any;
-  apiCoreHeaders: any;  
+  apiBaseUrl: string;
+  apiCoreHeaders: {apikey: string };  
 
-  constructor(apiKey: any) {
+  constructor(apiKey: string) {
     this.apiBaseUrl = API_URL;
     this.apiCoreHeaders = { apikey: apiKey };
   }
