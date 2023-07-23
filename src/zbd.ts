@@ -28,6 +28,9 @@ import {
   ValidateLightningAddressDataResponseType,
   SendLightningAddressPaymentDataResponseType,
   CreateChargeFromLightningAddressOptionsType,
+  OAuth2AuthorizationRequestType,
+  OAuth2GetAccessTokenRequestType,
+  OAuth2GetRefreshTokenRequestType,
 } from './types';
 
 class zbd {
@@ -396,6 +399,96 @@ class zbd {
     });
 
     return response;
+  }
+
+  async authorizeOAuth2(options: OAuth2AuthorizationRequestType) {
+
+    const queryParams = new URLSearchParams();
+    queryParams.append('client_id', options.clientId);
+    queryParams.append('response_type', options.responseType);
+    queryParams.append('redirect_uri', options.redirectUri);
+    queryParams.append('code_challenge', options.codeChallenge);
+    queryParams.append('code_challenge_method', options.codeChallengeMethod);
+
+    const response = await getData({
+      url: `${API_URL}${API.OAUTH2_AUTHORIZATION_ENDPOINT}?${queryParams}`,
+      headers: { ...this.apiCoreHeaders },
+    });
+
+    return response;
+  }
+
+  async getOAuth2AccessToken(options: OAuth2GetAccessTokenRequestType) {
+    
+    const queryParams = new URLSearchParams({
+      'Content-Type': 'application/json'
+    });
+
+    const requestBody = {
+      client_id: options.clientId,
+      client_secret: options.clientSecret,
+      grant_type: options.grantType,
+      redirect_uri: options.redirectUri,
+      code: options.code,
+      code_verifier: options.codeVerifier,
+    }
+
+    const response = await postData({
+      url: `${API_URL}${API.OAUTH2_GET_TOKEN_ENDPOINT}?${queryParams}`,
+      headers: {
+        ...this.apiCoreHeaders,
+      },
+      body: requestBody,
+    });
+
+    return response;
+  }
+
+  async refreshOAuth2Token(options: OAuth2GetRefreshTokenRequestType) {
+
+    const requestBody = {
+      client_id: options.clientId,
+      client_secret: options.clientSecret,
+      grant_type: options.grantType,
+      redirect_uri: options.redirectUri,
+      refresh_token: options.refreshToken,
+    }
+
+    const response = await postData({
+      url: `${API_URL}${API.OAUTH2_GET_TOKEN_ENDPOINT}`,
+      headers: {
+        ...this.apiCoreHeaders,
+      },
+      body: requestBody,
+    });
+
+    return response;
+  }
+
+  async getUser(oauth2AccessToken: string) {
+
+    const response = await getData({
+      url: `${API_URL}${API.OAUTH2_GET_USER_PROFILE_ENDPOINT}`,
+      headers: {
+        ...this.apiCoreHeaders,
+        usertoken: oauth2AccessToken,
+      },
+    });
+
+    return response;
+  }
+
+  async getUserWallet(oauth2AccessToken: string) {
+
+    const response = await getData({
+      url: `${API_URL}${API.OAUTH2_GET_USER_WALLET_ENDPOINT}`,
+      headers: {
+        ...this.apiCoreHeaders,
+        usertoken: oauth2AccessToken,
+      },
+    });
+
+    return response; 
   }
 }
 
