@@ -1,7 +1,7 @@
 {
   "name": "@zbd/node",
-  "version": "0.6.2",
-  "description": "ZEBEDEE NodeJS SDK",
+  "version": "0.6.3",
+  "description": "ZBD NodeJS SDK",
   "author": "ZEBEDEE",
   "license": "MIT",
   "scripts": {

@@ -159,7 +159,7 @@ class zbd {
     } = options;
 
 
-    // Addressing issue on ZEBEDEE API where it accepts `lnaddress` property
+    // Addressing issue on ZBD API where it accepts `lnaddress` property
     // instead of `lnAddress` property as is standardized
     let lightningAddress = lnaddress || lnAddress;
 

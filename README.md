@@ -1,4 +1,4 @@
-<h1 align='center'>ZEBEDEE Node.js SDK</h1>
+<h1 align='center'>ZBD Node.js SDK</h1>
 
 <div align='center'>
 <img width='100' src='https://zbd-node.dev.zebedee.cloud/zbd-node-logo.png' />
@@ -7,7 +7,7 @@
 
 <div align='center'>
 
-Node.js library for the ZEBEDEE API
+Node.js library for the ZBD API
 
 <br />
 
@@ -22,7 +22,7 @@ Node.js library for the ZEBEDEE API
 <p align='center'>
   <a href='https://docs.zebedee.io'><strong>Documentation</strong></a> ·
   <a href='https://dashboard.zebedee.io'><strong>Developer Dashboard</strong></a> ·
-  <a href='https://playground.dev.zebedee.cloud'><strong>Dev Playground</strong></a> ·
+  <a href='https://nextjs.zbd.dev'><strong>Dev Playground</strong></a> ·
   <a href='https://status.zebedee.io'><strong>API Status</strong></a>
 </p>
 
@@ -35,13 +35,13 @@ Node.js library for the ZEBEDEE API
 
 ## Introduction
 
-**This is the SDK for NodeJS that interacts with the ZEBEDEE API.**
+**This is the SDK for NodeJS that interacts with the ZBD API.**
 
-[ZEBEDEE](https://zebedee.io) is the payments platform for modern developers, providing the speed and reliability innovators need to create monetized and meaningfully-engaging user experiences.
+[ZBD](https://zebedee.io) is the payments platform for modern developers, providing the speed and reliability innovators need to create monetized and meaningfully-engaging user experiences.
 
-We enable businesses and consumers to quickly introduce instantaneous Bitcoin payments to the fabric of their applications, games, and platforms. ZEBEDEE has the most comprehensive set of Bitcoin Lightning API capabilities and is industry-leader in supporting companies in the fields of gaming, social, adtech and fintech.
+We enable businesses and consumers to quickly introduce instantaneous Bitcoin payments to the fabric of their applications, games, and platforms. ZBD has the most comprehensive set of Bitcoin Lightning API capabilities and is industry-leader in supporting companies in the fields of gaming, social, adtech and fintech.
 
-With ZEBEDEE, it's easy! Anyone can do it. **What are YOU building?**
+With ZBD, it's easy! Anyone can do it. **What are YOU building?**
 
 ------
 
@@ -300,7 +300,7 @@ const data = await zbd.isSupportedRegion('12.110.139.14');
 ### getZBDProdIps
 
 ```js
-// Get ZEBEDEE API Production IPs
+// Get ZBD API Production IPs
 const data = await zbd.getZBDProdIps();
 ```
 
@@ -313,7 +313,7 @@ const data = await zbd.getBtcUsdExchangeRate();
 
 ## Full API Reference & Configuration
 
-[View full documentation and API reference for the @zbd/node library](https://zbd-node.dev.zebedee.cloud).
+[View full documentation and API reference for the @zbd/node library](https://node.zbd.dev).
 
 ![](https://i.imgur.com/D84ZZtg.png)
 
