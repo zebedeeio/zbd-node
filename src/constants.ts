@@ -39,4 +39,11 @@ export const API = {
   DECODE_INVOICE_ENDPOINT: '/v0/decode-invoice',
   FETCH_ZBD_PROD_IPS_ENDPOINT: '/v0/prod-ips',
   BTCUSD_PRICE_TICKER_ENDPOINT: '/v0/btcusd',
+
+  //OAuth2
+  OAUTH2_AUTHORIZATION_ENDPOINT: '/v1/oauth2/authorize',
+  OAUTH2_GET_TOKEN_ENDPOINT: '/v1/oauth2/token',
+  OAUTH2_GET_USER_PROFILE_ENDPOINT: '/v1/oauth2/user',
+  OAUTH2_GET_USER_WALLET_ENDPOINT: '/v1/oauth2/wallet'
+
 }    

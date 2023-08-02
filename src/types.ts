@@ -360,4 +360,64 @@ export interface FetchChargeFromGamertagOptionsType {
   internalId: string;
 }
 
- 
+export interface OAuth2AuthorizationRequestType {
+  clientId: string;
+  responseType: string;
+  redirectUri: string;
+  codeChallengeMethod: string;
+  codeChallenge: string;
+  scope: string;
+}
+
+export interface OAuth2AuthorizationResponseType {
+  data: {
+    accessToken: string;
+  },
+  success: boolean;
+}
+
+export interface OAuth2GetAccessTokenRequestType {
+  clientId: string;
+  clientSecret: string;
+  grantType: string;
+  redirectUri: string;
+  code: string;
+  codeVerifier: string;
+}
+
+export interface OAuth2GetRefreshTokenRequestType {
+  clientId: string;
+  clientSecret: string;
+  grantType: string;
+  redirectUri: string;
+  refreshToken: string;
+}
+
+export interface GetUserDataResponseType {
+  data: {
+    email: string;
+    gamertag: string;
+    id: string;
+    image: string;
+    isVerified: string;
+    ligthningAddress: string;
+    publicBio: string;
+    publicStaticCharge: string;
+    social: Record<string, string>;
+  },
+  success: boolean;
+}
+
+export interface GetUserWalletDataResponseType {
+  data: {
+    balance: string;
+    remainingAmountLimits: {
+      daily: string;
+      maxCredit: string;
+      monthly: string;
+      weekly: string;
+    },
+  },
+  message: string;
+  success: boolean;
+}
