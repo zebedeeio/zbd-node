@@ -20,7 +20,7 @@ Node.js library for the ZBD API
 
 
 <p align='center'>
-  <a href='https://docs.zebedee.io'><strong>Documentation</strong></a> ·
+  <a href='https://zbd-node.dev.zebedee.cloud'><strong>Documentation</strong></a> ·
   <a href='https://dashboard.zebedee.io'><strong>Developer Dashboard</strong></a> ·
   <a href='https://nextjs.zbd.dev'><strong>Dev Playground</strong></a> ·
   <a href='https://status.zebedee.io'><strong>API Status</strong></a>
