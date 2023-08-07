@@ -22,7 +22,7 @@ Node.js library for the ZBD API
 <p align='center'>
   <a href='https://zbd-node.dev.zebedee.cloud'><strong>Documentation</strong></a> ·
   <a href='https://dashboard.zebedee.io'><strong>Developer Dashboard</strong></a> ·
-  <a href='https://playground.dev.zebedee.cloud'><strong>Dev Playground</strong></a> ·
+  <a href='https://nextjs.zbd.dev'><strong>Dev Playground</strong></a> ·
   <a href='https://status.zebedee.io'><strong>API Status</strong></a>
 </p>
 
@@ -313,7 +313,7 @@ const data = await zbd.getBtcUsdExchangeRate();
 
 ## Full API Reference & Configuration
 
-[View full documentation and API reference for the @zbd/node library](https://zbd-node.dev.zebedee.cloud).
+[View full documentation and API reference for the @zbd/node library](https://node.zbd.dev).
 
 ![](https://i.imgur.com/D84ZZtg.png)
 
