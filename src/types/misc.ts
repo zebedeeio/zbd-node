@@ -1,4 +1,3 @@
-
 export interface BTCUSDDataResponseType {
   data: {
     btcUsdPrice: string;

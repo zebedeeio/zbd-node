@@ -1,8 +1,7 @@
-
 export interface WalletDataResponseType {
-    data: {
-      balance: string;
-      unit: string;
-    }
-    message: string;
+  data: {
+    balance: string;
+    unit: string;
   }
+  message: string;
+}

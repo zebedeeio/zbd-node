@@ -7,8 +7,8 @@ describe('createCharge', () => {
   it('should create a charge successfully', async () => {
     const chargeData = {
       amount: '10000',
-      description: 'My Charge Description',
       expiresIn: 300,
+      description: 'My Charge Description',
       callbackUrl: 'https://your-website.com/callback',
       internalId: '11af01d092444a317cb33faa6b8304b8',
     };
