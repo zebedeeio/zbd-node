@@ -8,6 +8,7 @@ import {
   BTCUSDDataResponseType,
   SendPaymentOptionsType,
   DecodeChargeOptionsType,
+  DecodeChargeResponseType,
   ProdIPSDataResponseType,
   StaticChargeOptionsType,
   KeysendDataResponseType,
@@ -18,7 +19,8 @@ import {
   InvoicePaymentDataResponseType,
   SupportedRegionDataResponseType,
   InternalTransferDataResponseType,
-  WithdrawalRequestDataResponseType,
+  GetWithdrawalRequestDataResponseType,
+  CreateWithdrawalRequestDataResponseType,
   FetchChargeFromGamertagOptionsType,
   GamertagTransactionDataResponseType,
   FetchUserIdByGamertagDataResponseType,
@@ -28,13 +30,15 @@ import {
   ValidateLightningAddressDataResponseType,
   SendLightningAddressPaymentDataResponseType,
   CreateChargeFromLightningAddressOptionsType,
-} from './types';
+  SendGamertagPaymentDataResponseType,
+  FetchChargeFromLightningAddressDataResponseType,
+} from './types/index';
 
 class zbd {
-  apiBaseUrl: any;
-  apiCoreHeaders: any;  
+  apiBaseUrl: string;
+  apiCoreHeaders: {apikey: string };  
 
-  constructor(apiKey: any) {
+  constructor(apiKey: string) {
     this.apiBaseUrl = API_URL;
     this.apiCoreHeaders = { apikey: apiKey };
   }
@@ -48,7 +52,7 @@ class zbd {
       callbackUrl,
     } = options;
 
-    const response = await postData({
+    const response : ChargeDataResponseType = await postData({
       url: `${API_URL}${API.CHARGES_ENDPOINT}`,
       headers: { ...this.apiCoreHeaders },
       body: {
@@ -64,7 +68,7 @@ class zbd {
   }
 
   async getCharge(chargeId: string) {
-    const response = await getData({
+    const response: ChargeDataResponseType = await getData({
       url: `${API_URL}${API.CHARGES_ENDPOINT}/${chargeId}`,
       headers: { ...this.apiCoreHeaders },
     });
@@ -75,7 +79,7 @@ class zbd {
   async decodeCharge(options: DecodeChargeOptionsType) {
     const { invoice } = options;
 
-    const response = await postData({
+    const response: DecodeChargeResponseType = await postData({
       url: `${API_URL}${API.DECODE_INVOICE_ENDPOINT}`,
       headers: { ...this.apiCoreHeaders },
       body: { invoice },
@@ -93,7 +97,7 @@ class zbd {
       description,
     } = options;
 
-    const response = await postData({
+    const response : CreateWithdrawalRequestDataResponseType = await postData({
       url: `${API_URL}${API.WITHDRAWAL_REQUESTS_ENDPOINT}`,
       headers: { ...this.apiCoreHeaders },
       body: {
@@ -109,7 +113,7 @@ class zbd {
   }
 
   async getWithdrawalRequest(withdrawalRequestId: string) {
-    const response = await getData({
+    const response : GetWithdrawalRequestDataResponseType = await getData({
       url: `${API_URL}${API.WITHDRAWAL_REQUESTS_ENDPOINT}/${withdrawalRequestId}`,
       headers: { ...this.apiCoreHeaders },
     });
@@ -118,7 +122,7 @@ class zbd {
   }
 
   async validateLightningAddress(lightningAddress: string) {    
-    const response = await getData({
+    const response : ValidateLightningAddressDataResponseType = await getData({
       url: `${API_URL}${API.VALIDATE_LN_ADDRESS_ENDPOINT}/${lightningAddress}`,
       headers: { ...this.apiCoreHeaders },
     });
@@ -135,7 +139,7 @@ class zbd {
       callbackUrl,
     } = options;
 
-    const response = await postData({
+    const response : SendLightningAddressPaymentDataResponseType = await postData({
       url: `${API_URL}${API.SEND_LN_ADDRESS_PAYMENT_ENDPOINT}`,
       headers: { ...this.apiCoreHeaders },
       body: {
@@ -163,7 +167,7 @@ class zbd {
     // instead of `lnAddress` property as is standardized
     let lightningAddress = lnaddress || lnAddress;
 
-    const response = await postData({
+    const response: FetchChargeFromLightningAddressDataResponseType = await postData({
       url: `${API_URL}${API.CREATE_CHARGE_FROM_LN_ADDRESS_ENDPOINT}`,
       headers: { ...this.apiCoreHeaders },
       body: {
@@ -177,7 +181,7 @@ class zbd {
   }
   
   async getWallet() {
-    const response = await getData({
+    const response : WalletDataResponseType = await getData({
       url: `${API_URL}${API.WALLET_ENDPOINT}`,
       headers: { ...this.apiCoreHeaders },
     });
@@ -186,7 +190,7 @@ class zbd {
   }
 
   async isSupportedRegion(ipAddress: string) {    
-    const response = await getData({
+    const response : SupportedRegionDataResponseType = await getData({
       url: `${API_URL}${API.IS_SUPPORTED_REGION_ENDPOINT}/${ipAddress}`,
       headers: { ...this.apiCoreHeaders },
     });
@@ -195,7 +199,7 @@ class zbd {
   }
 
   async getZBDProdIps() {    
-    const response = await getData({
+    const response: ProdIPSDataResponseType = await getData({
       url: `${API_URL}${API.FETCH_ZBD_PROD_IPS_ENDPOINT}`,
       headers: { ...this.apiCoreHeaders },
     });
@@ -204,7 +208,7 @@ class zbd {
   }
 
   async getBtcUsdExchangeRate() {    
-    const response = await getData({
+    const response: BTCUSDDataResponseType = await getData({
       url: `${API_URL}${API.BTCUSD_PRICE_TICKER_ENDPOINT}`,
       headers: { ...this.apiCoreHeaders },
     });
@@ -215,7 +219,7 @@ class zbd {
   async internalTransfer(options: InternalTransferOptionsType) {    
     const { amount, receiverWalletId } = options;
 
-    const response = await postData({
+    const response: InternalTransferDataResponseType = await postData({
       url: `${API_URL}${API.INTERNAL_TRANSFER_ENDPOINT}`,
       headers: { ...this.apiCoreHeaders },
       body: {
@@ -236,7 +240,7 @@ class zbd {
       callbackUrl,
     } = options;
 
-    const response = await postData({
+    const response: KeysendDataResponseType = await postData({
       url: `${API_URL}${API.KEYSEND_PAYMENT_ENDPOINT}`,
       headers: { ...this.apiCoreHeaders },
       body: {
@@ -260,7 +264,7 @@ class zbd {
       callbackUrl,
     } = options;
 
-    const response = await postData({
+    const response : InvoicePaymentDataResponseType = await postData({
       url: `${API_URL}${API.PAYMENTS_ENDPOINT}`,
       headers: { ...this.apiCoreHeaders },
       body: {
@@ -287,7 +291,7 @@ class zbd {
   async sendGamertagPayment(options: SendGamertagPaymentOptionsType) {    
     const { amount, gamertag, description } = options;
 
-    const response = await postData({
+    const response: SendGamertagPaymentDataResponseType = await postData({
       url: `${API_URL}${API.SEND_GAMERTAG_PAYMENT_ENDPOINT}`,
       headers: { ...this.apiCoreHeaders },
       body: {
@@ -301,7 +305,7 @@ class zbd {
   }
 
   async getGamertagTransaction(transactionId: string) {    
-    const response = await getData({
+    const response: GamertagTransactionDataResponseType = await getData({
       url: `${API_URL}${API.GET_GAMERTAG_PAYMENT_ENDPOINT}/${transactionId}`,
       headers: { ...this.apiCoreHeaders },
     });
@@ -310,7 +314,7 @@ class zbd {
   }
 
   async getUserIdByGamertag(gamertag: string) {    
-    const response = await getData({
+    const response: FetchUserIdByGamertagDataResponseType = await getData({
       url: `${API_URL}${API.GET_USERID_FROM_GAMERTAG_ENDPOINT}/${gamertag}`,
       headers: { ...this.apiCoreHeaders },
     });
@@ -319,7 +323,7 @@ class zbd {
   }
 
   async getGamertagByUserId(userId: string) {    
-    const response = await getData({
+    const response: FetchGamertagByUserIdDataResponseType = await getData({
       url: `${API_URL}${API.GET_GAMERTAG_FROM_USERID_ENDPOINT}/${userId}`,
       headers: { ...this.apiCoreHeaders },
     });
@@ -336,7 +340,7 @@ class zbd {
       callbackUrl,
     } = options;
 
-    const response = await postData({
+    const response : FetchChargeFromGamertagDataResponseType = await postData({
       url: `${API_URL}${API.CREATE_CHARGE_FROM_GAMERTAG_ENDPOINT}`,
       headers: { ...this.apiCoreHeaders },
       body: {
@@ -362,7 +366,7 @@ class zbd {
       successMessage,
     } = options;
 
-    const response = await postData({
+    const response : StaticChargeDataResponseType = await postData({
       url: `${API_URL}${API.STATIC_CHARGES_ENDPOINT}`,
       headers: { ...this.apiCoreHeaders },
       body: {

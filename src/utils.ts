@@ -35,6 +35,7 @@ export async function postData({
       status: response.status,
       message: errorBody.message || 'API request failed',
     };
+    
 
     throw error;
   }
@@ -62,6 +63,7 @@ export async function patchData({
   });
 
   if (!response.ok) {
+
     const errorBody = await response.json();
     const error = {
       status: response.status,
@@ -91,6 +93,7 @@ export async function getData({
   });
 
   if (!response.ok) {
+
     const errorBody = await response.json();
     const error = {
       status: response.status,

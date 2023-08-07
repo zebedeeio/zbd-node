@@ -12,7 +12,8 @@
     "declarationMap": true,
     "declaration": true,
     "rootDir": "./src",
-    "sourceMap": true
+    "sourceMap": true,
+    "noImplicitAny": true
   },
   "include": [
     "src/**/*"
