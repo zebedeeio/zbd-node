@@ -25,7 +25,7 @@ export interface GamertagTransactionDataResponseType {
     confirmedAt: string;
     processedAt: string;
   }
-  message: string;
+  message: string | undefined;
   success: boolean;
 }
 
@@ -91,7 +91,7 @@ export function isGamertagTransactionDataResponseType(object: any): object is Ga
   return (
     typeof object === 'object' &&
     object !== null &&
-    typeof object.message === 'string' &&
+    (typeof object.message === 'string' || object.message === undefined) &&
     typeof object.success === 'boolean' &&
     typeof object.data === 'object' &&
     object.data !== null &&
