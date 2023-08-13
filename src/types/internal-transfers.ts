@@ -19,3 +19,16 @@ export interface InternalTransferOptionsType {
   amount: string;
   receiverWalletId: string;
 }
+
+export function isInternalTransferDataResponseType(data: any): data is InternalTransferDataResponseType {
+  return typeof data.id === 'string' &&
+      typeof data.senderWalletId === 'string' &&
+      typeof data.receiverWalletId === 'string' &&
+      typeof data.userId === 'string' &&
+      typeof data.sendTxId === 'string' &&
+      typeof data.receiveTxId === 'string' &&
+      typeof data.status === 'string' &&
+      typeof data.amount === 'string' &&
+      typeof data.createdAt === 'string' &&
+      typeof data.updatedAt === 'string';
+}
