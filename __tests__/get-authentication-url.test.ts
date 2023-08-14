@@ -28,7 +28,6 @@ describe("getAuthenticationUrl", () => {
   });
 
   it("should throw an error if client id is not set", async () => {
-    // ZBD.setClientId();
     const params = {
       redirect_uri: "http://localhost:3000/callback",
       state: "random_state",
@@ -38,51 +37,6 @@ describe("getAuthenticationUrl", () => {
       "A code challenge is required. Generate one using .generatePKCE()."
     );
   });
-
-  //   it("should throw an error if client secret is not set", async () => {
-  //     // ZBD.setClientSecret(null);
-  //     const params = {
-  //       redirect_uri: "http://localhost:3000/callback",
-  //       state: "random_state",
-  //     };
-
-  //     await expect(ZBD.getAuthenticationUrl(params)).rejects.toThrow(
-  //       "A code challenge is required. Generate one using .generatePKCE()."
-  //     );
-  //   });
-
-  //   it("should throw an error if code challenge is not generated", async () => {
-  //     const params = {
-  //       redirect_uri: "http://localhost:3000/callback",
-  //       state: "random_state",
-  //     };
-
-  //     await expect(ZBD.getAuthenticationUrl(params)).rejects.toThrow(
-  //       "A code challenge is required."
-  //     );
-  //   });
-
-  //   it("should throw an error if redirect_uri is missing", async () => {
-  //     const params = {
-  //       redirect_uri: undefined,
-  //       state: "random_state",
-  //     };
-
-  //     await expect(ZBD.getAuthenticationUrl(params)).rejects.toThrow(
-  //       "A redirect uri is required."
-  //     );
-  //   });
-
-  //   it("should throw an error if state parameter is missing", async () => {
-  //     const params = {
-  //       redirect_uri: "http://localhost:3000/callback",
-  //       state: undefined, // Omitting the state property intentionally
-  //     };
-
-  //     await expect(ZBD.getAuthenticationUrl(params)).rejects.toThrow(
-  //       "A state parameter is required."
-  //     );
-  //   });
 
   // Add more test cases for different scenarios...
 });

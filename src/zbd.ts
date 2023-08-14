@@ -1,4 +1,4 @@
-import { API_URL, API, V2_DEFAULT_DOMAIN as DEFAULT_DOMAIN } from "./constants";
+import { API_URL, API } from "./constants";
 import { postData, getData, patchData } from "./utils";
 import {
   ChargeOptionsType,
@@ -378,8 +378,10 @@ class zbd {
     return response;
   }
 
-  OAuth2AuthorizationUrl = (domain = DEFAULT_DOMAIN) => {
-    return `https://${domain}/oauth2/authorize`;
+  // Authorization
+
+  OAuth2AuthorizationUrl = (domain = API_URL) => {
+    return `${domain}/v1/oauth2/authorize`;
   };
 
   /**
@@ -429,11 +431,30 @@ class zbd {
         "A code challenge is required. Generate one using .generatePKCE()."
       );
     }
-    let authUrl;
+    let response;
+    try {
+      const res = await getData({
+        url: `${API_URL}${API.GET_AUTHORIZATION_ENDPOINT}`,
+        headers: { ...this.apiCoreHeaders },
+        queryParams: {
+          response_type,
+          client_id,
+          redirect_uri,
+          scope,
+          state,
+          code_challenge: this.codeChallenge,
+          code_challenge_method: "S256",
+        },
+      });
+      response = res;
+    } catch (error) {
+      throw new Error("Error generating authentication URL: " + error);
+    }
+    // let authUrl;
 
-    authUrl = `${baseUrl}?resp_type=${response_type}&client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&state=${state}&code_challenge=${this.codeChallenge}&code_challenge_method=S256`;
+    // authUrl = `${baseUrl}?resp_type=${response_type}&client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&state=${state}&code_challenge=${this.codeChallenge}&code_challenge_method=S256`;
 
-    return authUrl;
+    return response;
   }
 
   createBrowserSafeString(toBeConverted: any) {
@@ -532,6 +553,8 @@ class zbd {
 
     return await this.generateCodeChallenge();
   }
+
+  // Fetch Access token
 }
 
 export { zbd };

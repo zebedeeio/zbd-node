@@ -1,6 +1,5 @@
 // BaseUrl
 export const API_URL = "https://api.zebedee.io";
-export const V2_DEFAULT_DOMAIN = "api.zebedee.io/v1/";
 
 // Test API Key
 export const TEST_API_KEY: string = "8qJxln3JVJsQM0IOJhfnJopO0JSiLdlK";
