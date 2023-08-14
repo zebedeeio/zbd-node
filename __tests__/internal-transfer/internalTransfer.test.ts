@@ -9,11 +9,12 @@ describe('Initiate Internal Transfer', () => {
   it('should initiate an internal transfer successfully', async () => {
     // Mock parameters
     const requestBody: InternalTransferOptionsType = {
-      amount: "10000",
-      receiverWalletId: "b904ee02-ec0b-4fd4-b99f-1f2d3d0001a6"
+      amount: "1000",
+      receiverWalletId: "b804ee02-ec0b-4fd4-b99f-1f2d3d0001a6"
     };
 
     const response = await ZBD.internalTransfer(requestBody);
+    
     console.log(response)
 
     expect(response.success).toBe(true);
@@ -21,6 +22,22 @@ describe('Initiate Internal Transfer', () => {
 
     // Data Validation
     expect(isInternalTransferDataResponseType(response)).toBeTruthy();
+  });
+
+  describe('internalTransfer error scenarios', () => {
+    it('should throw an error given an invalid receiver wallet ID', async () => {
+
+      const errorBody: InternalTransferOptionsType = {
+        amount: "100000",
+        receiverWalletId: "1234"
+      };
+      
+     await expect(ZBD.internalTransfer(errorBody)).rejects.toMatchObject({
+      message: "Error processing transfer.",
+      status: 400,
+     })  
+  
+    });
   });
 
 });

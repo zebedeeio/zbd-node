@@ -23,6 +23,21 @@ describe('fetchChargeFromLightningAddress', () => {
     });
 
     describe('fetchChargeFromLightningAddress error scenarios', () => {
-       
+        const errorPayload: CreateChargeFromLightningAddressOptionsType  = {
+            lnAddress: "aol@lol.xqz",
+            lnaddress: "aol@lol.xqz",
+            amount: "10000",
+            description: "Sending to a Lightning Address",
+          };
+    
+        it('should throw an error when given invalid Lightning Address', async () => {
+            
+            await expect(ZBD.createChargeFromLightningAddress(errorPayload)).rejects.toMatchObject({
+                message: "Could not get lighning address info.",
+                status: 400,
+               })  
+
+
+        });
     });
 });

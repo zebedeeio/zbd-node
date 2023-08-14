@@ -17,6 +17,13 @@ describe('validateLightningAddress', () => {
 });
 
   describe('validateLightningAddress error scenarios', () => {
+    const errorLightningAddress = "aol@lol.xqz";
 
+  it('should say valid is false given invalid Lightning Address', async () => {
+    const response = await ZBD.validateLightningAddress(errorLightningAddress); 
+    expect(response.data.valid).toBe(false);
+    expect(response.success).toBe(true);  
+
+  });
   });
 });
