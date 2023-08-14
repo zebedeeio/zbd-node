@@ -1,6 +1,6 @@
 
 export interface StaticChargeOptionsType {
-  allowedSlots: string | null;
+  allowedSlots: number | null;
   minAmount: string;
   maxAmount: string;
   description: string;
@@ -40,7 +40,7 @@ export function isStaticChargeDataResponseType(obj: any): obj is StaticChargeDat
     typeof obj.data === 'object' &&
     typeof obj.data.id === 'string' &&
     typeof obj.data.unit === 'string' &&
-    typeof obj.data.slots === 'number' &&  
+    (typeof obj.data.slots === 'number' || obj.data.slots === null) &&
     typeof obj.data.minAmount === 'string' &&
     typeof obj.data.maxAmount === 'string' &&
     typeof obj.data.createdAt === 'string' &&
