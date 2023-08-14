@@ -15,6 +15,4 @@ describe('BTC to USD Exchange Rate', () => {
     expect(response.message).toBe("Successfully retrieved BTC USD price ticker information.");
   });
 
-  describe('getBtcUsdExchangeRate error scenarios', () => {
-  });
 });

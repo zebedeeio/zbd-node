@@ -7,7 +7,7 @@ const ZBD = new zbd(TEST_API_KEY);
 describe('API Production IPs', () => {
 
   it('should successfully fetch the list of production IPs', async () => {
-    const response = await ZBD.getZBDProdIps(); // Assuming ZBD has a method called getProductionIPs
+    const response = await ZBD.getZBDProdIps(); 
 
     console.log(response)
     expect(response).toBeDefined();
@@ -16,7 +16,4 @@ describe('API Production IPs', () => {
     expect(Array.isArray(response.data.ips)).toBe(true);
   });
 
-  describe('getProductionIPs error scenarios', () => {
-    // Place any error scenario tests here, like handling if the response doesn't contain 'ips', etc.
-  });
 });
