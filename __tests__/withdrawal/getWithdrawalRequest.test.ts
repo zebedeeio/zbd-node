@@ -19,12 +19,14 @@ describe('getWithdrawalRequest', () => {
 
   });
 
-   // Withdrawal Request not found
-  it('should return an error for a non-existent withdrawal ID', async () => {
-    const NON_EXISTENT_WITHDRAWAL_ID = 'invalid-id'
-    await expect(ZBD.getWithdrawalRequest(NON_EXISTENT_WITHDRAWAL_ID)).resolves.toMatchObject({
-      message: "Failed to fetch withdrawal request."
+  describe('createWithdrawalRequest error scenarios', () => {
+    it('should return an error for a non-existent withdrawal ID', async () => {
+      const NON_EXISTENT_WITHDRAWAL_ID = 'invalid-id'
+      await expect(ZBD.getWithdrawalRequest(NON_EXISTENT_WITHDRAWAL_ID)).resolves.toMatchObject({
+        message: "Failed to fetch withdrawal request."
+      });
     });
   });
+  
 });
 

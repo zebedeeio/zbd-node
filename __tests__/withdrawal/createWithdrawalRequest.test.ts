@@ -32,6 +32,27 @@ describe('createWithdrawalRequest', () => {
 
   });
 
+  describe('createWithdrawalRequest error scenarios', () => {
+    it('should throw an error given a faulty payload (amount invalid)', async () => {
+
+      const faultyRequestBody: WithdrawalRequestOptionsType = {
+        expiresIn: 300,
+        amount: "0",
+        description: "My Withdrawal Description",
+        internalId: "internalId",
+        callbackUrl: "https://your-website.com/callback"
+      };
+    
+      
+     await expect(ZBD.createWithdrawalRequest(faultyRequestBody)).rejects.toMatchObject({
+      message: "The \"amount\" property (in millisatoshis) must be greater than 1 sat.",
+      status: 400,
+     })  
+  
+    });
+  });
+  
+
   
 
 });
