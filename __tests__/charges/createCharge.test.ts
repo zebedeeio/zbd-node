@@ -25,4 +25,23 @@ describe('createCharge', () => {
     expect(response.data.description).toBe(payload.description);
   });
 
+  describe('fetchGamertagByUserID error scenarios', () => {
+    it('should throw an error given an erroneous payload (amount = 0)', async () => {
+
+      const erroneousPayload: ChargeOptionsType = {
+        expiresIn: 100,
+        amount: "0",
+        description: "My Charge Test Zapier",
+        internalId: "internalId",
+        callbackUrl: "https://my-website.com/zbd-callback"
+      };
+      
+     await expect(ZBD.createCharge(erroneousPayload)).rejects.toMatchObject({
+      message: "Request has missing or mismatch params.",
+      status: 400,
+     })  
+  
+    });
+  });
+
 });
