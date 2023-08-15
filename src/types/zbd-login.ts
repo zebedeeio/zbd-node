@@ -79,6 +79,3 @@ export interface ZBDUserWalletData {
   balance: string;
   remaining_amount_limits: ZBDUserWalletDataLimits;
 }
-
-// https://api.zebedee.io/v1/oauth2/authorize/v1/oauth2/authorize?response_type=code&client_id=client_id&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fcallback&scope=user&state=random_state&code_challenge=YbajXYJlxPXvDLy0iUN2Z2IpxeUeSCqoAy1XVCsxaOQ&code_challenge_method=S256
-// curl -L -X GET "https://api.zebedee.io/v1/oauth2/authorize?response_type=token&client_id=dummy_client_id&redirect_uri=https://example.com/callback&scope=read%20write&state=dummy_state&code_challenge=dummy_code_challenge&code_challenge_method=S256"
