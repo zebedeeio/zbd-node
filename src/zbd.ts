@@ -33,6 +33,16 @@ import {
   SendGamertagPaymentDataResponseType,
   FetchChargeFromLightningAddressDataResponseType,
   OAuth2AuthorizationRequestType,
+  FetchTokenBody,
+  FetchTokenParam,
+  FetchAccessTokenRes,
+  RefreshTokenParam,
+  RefreshTokenBody,
+  RefreshTokenRes,
+  FetchUserDataParam,
+  ZBDUserData,
+  ZBDUserWalletData,
+  FetchUserWalletDataParam,
 } from "./types/index";
 import * as crypto from "crypto";
 
@@ -381,7 +391,7 @@ class zbd {
   // Authorization
 
   OAuth2AuthorizationUrl = (domain = API_URL) => {
-    return `${domain}/v1/oauth2/authorize`;
+    return `${domain}`;
   };
 
   /**
@@ -431,30 +441,19 @@ class zbd {
         "A code challenge is required. Generate one using .generatePKCE()."
       );
     }
-    let response;
-    try {
-      const res = await getData({
-        url: `${API_URL}${API.GET_AUTHORIZATION_ENDPOINT}`,
-        headers: { ...this.apiCoreHeaders },
-        queryParams: {
-          response_type,
-          client_id,
-          redirect_uri,
-          scope,
-          state,
-          code_challenge: this.codeChallenge,
-          code_challenge_method: "S256",
-        },
-      });
-      response = res;
-    } catch (error) {
-      throw new Error("Error generating authentication URL: " + error);
-    }
-    // let authUrl;
 
-    // authUrl = `${baseUrl}?resp_type=${response_type}&client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&state=${state}&code_challenge=${this.codeChallenge}&code_challenge_method=S256`;
+    const code_challenge_method = "S256";
 
-    return response;
+    let url = `${baseUrl}${API.GET_AUTHORIZATION_ENDPOINT}`;
+    url += `?response_type=${response_type}`;
+    url += `&client_id=${client_id}`;
+    url += `&redirect_uri=${redirect_uri}`;
+    url += `&scope=${scope}`;
+    url += `&state=${state}`;
+    url += `&code_challenge=${this.codeChallenge}`;
+    url += `&code_challenge_method=${code_challenge_method}`;
+
+    return url;
   }
 
   createBrowserSafeString(toBeConverted: any) {
@@ -554,7 +553,156 @@ class zbd {
     return await this.generateCodeChallenge();
   }
 
-  // Fetch Access token
+  /**
+   * Fetches an access token using the provided authorization code and parameters.
+   * @param param - An object containing parameters for fetching the access token.
+   * @returns A promise that resolves with the access token response or rejects with an error.
+   * @throws Error if required parameters are missing or not set.
+   */
+  async fetchAccessToken(param: FetchTokenParam) {
+    if (!param.code) {
+      throw new Error("Authorization code is required");
+    }
+
+    if (!param.redirect_uri) {
+      throw new Error("Redirect URI is required");
+    }
+
+    if (!this.codeChallenge) {
+      throw new Error(
+        "A code challenge is required. Generate one using .generatePKCE()."
+      );
+    }
+
+    if (!this.clientId) {
+      throw new Error("Client ID is required. Set it using .setClientId()");
+    }
+
+    if (!this.clientSecret) {
+      throw new Error(
+        "Client Secret is required. Set it using .setClientSecret()"
+      );
+    }
+
+    const body: FetchTokenBody = {
+      client_id: this.clientId,
+      client_secret: this.clientSecret,
+      grant_type: "authorization_code",
+      code: param.code,
+      redirect_uri: param.redirect_uri,
+      code_verifier: this.codeVerifier,
+    };
+
+    console.log(
+      "URL: ",
+      `${API_URL}${API.FETCH_ACCESS_TOKEN_ENDPOINT}?Content-Type=application/json`
+    );
+
+    const response: FetchAccessTokenRes = await postData({
+      url: `${API_URL}${API.FETCH_ACCESS_TOKEN_ENDPOINT}?Content-Type=application/json`,
+      headers: { ...this.apiCoreHeaders },
+      body: body,
+    });
+
+    return response;
+  }
+
+  /**
+   * Refreshes an access token using the provided refresh token and other required parameters.
+   * @param param - The RefreshTokenParam object containing the necessary parameters.
+   * @throws {Error} - Throws an error if any required parameter is missing.
+   * @returns {Promise<RefreshTokenRes>} - Returns a promise that resolves with the refreshed token response.
+   */
+  async refreshToken(param: RefreshTokenParam) {
+    if (!param.code) {
+      throw new Error("Authorization code is required");
+    }
+
+    if (!param.redirect_uri) {
+      throw new Error("Redirect URI is required");
+    }
+
+    if (!this.codeChallenge) {
+      throw new Error(
+        "A code challenge is required. Generate one using .generatePKCE()."
+      );
+    }
+
+    if (!this.clientId) {
+      throw new Error("Client ID is required. Set it using .setClientId()");
+    }
+
+    if (!this.clientSecret) {
+      throw new Error(
+        "Client Secret is required. Set it using .setClientSecret()"
+      );
+    }
+
+    const body: RefreshTokenBody = {
+      client_id: this.clientId,
+      client_secret: this.clientSecret,
+      grant_type: "refresh_token",
+      code: param.code,
+      redirect_uri: param.redirect_uri,
+      code_verifier: this.codeVerifier,
+    };
+
+    const response: RefreshTokenRes = await postData({
+      url: `${API_URL}${API.REFRESH_TOKEN_ENDPOINT}?Content-Type=application/json`,
+      headers: { ...this.apiCoreHeaders },
+      body: body,
+    });
+
+    return response;
+  }
+
+  /**
+   * Fetches user data using the provided access token.
+   * @param param - The FetchUserDataParam object containing the required parameters.
+   * @throws {Error} - Throws an error if the access token is missing.
+   * @returns {Promise<ZBDUserData>} - Returns a promise that resolves with the fetched user data.
+   */
+  async fetchUserData(param: FetchUserDataParam) {
+    if (!param.access_token) {
+      throw new Error("Access token is required");
+    }
+
+    const headers = {
+      ...this.apiCoreHeaders,
+      usertoken: `Bearer ${param.access_token}`,
+    };
+
+    const response: ZBDUserData = await getData({
+      url: `${API_URL}${API.GET_USER_ENDPOINT}`,
+      headers: headers,
+    });
+
+    return response;
+  }
+
+  /**
+   * Fetches user wallet data using the provided access token.
+   * @param param - The FetchUserWalletDataParam object containing the required parameters.
+   * @throws {Error} - Throws an error if the access token is missing.
+   * @returns {Promise<ZBDUserWalletData>} - Returns a promise that resolves with the fetched user wallet data.
+   */
+  async fetchUserWalletData(param: FetchUserWalletDataParam) {
+    if (!param.access_token) {
+      throw new Error("Access token is required");
+    }
+
+    const headers = {
+      ...this.apiCoreHeaders,
+      usertoken: `Bearer ${param.access_token}`,
+    };
+
+    const response: ZBDUserWalletData = await getData({
+      url: `${API_URL}${API.GET_USER_WALLET_DATA_ENDPOINT}`,
+      headers: headers,
+    });
+
+    return response;
+  }
 }
 
 export { zbd };

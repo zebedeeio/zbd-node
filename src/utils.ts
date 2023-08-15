@@ -78,18 +78,10 @@ export async function patchData({
 export async function getData({
   url,
   headers,
-  queryParams, // Add queryParams as a parameter
 }: {
   url: string;
   headers?: any;
-  queryParams?: Record<string, string>; // Define queryParams type
 }) {
-  // Construct the URL with query parameters if provided
-  if (queryParams) {
-    const queryString = new URLSearchParams(queryParams).toString();
-    url += `?${queryString}`;
-  }
-
   const response = await fetch(url, {
     method: "GET",
     headers: {

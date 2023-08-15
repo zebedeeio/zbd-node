@@ -10,17 +10,17 @@ describe("getAuthenticationUrl", () => {
   });
 
   it("should generate auth url with correct params", async () => {
-    await ZBD.generatePKCECodes(); // Generate codeChallenge
+    await ZBD.generatePKCECodes();
 
     const params = {
-      redirect_uri: "http://localhost:3000/callback",
+      redirect_uri: "https://example.com/callback",
       state: "random_state",
     };
 
     const authUrl = await ZBD.getAuthenticationUrl(params);
 
     expect(authUrl).toContain("client_id=client_id");
-    expect(authUrl).toContain("redirect_uri=http://localhost:3000/callback");
+    expect(authUrl).toContain("redirect_uri=https://example.com/callback");
     expect(authUrl).toContain("scope=user");
     expect(authUrl).toContain("state=random_state");
     expect(authUrl).toContain(`code_challenge=${await ZBD.getCodeChallenge()}`);
@@ -29,7 +29,7 @@ describe("getAuthenticationUrl", () => {
 
   it("should throw an error if client id is not set", async () => {
     const params = {
-      redirect_uri: "http://localhost:3000/callback",
+      redirect_uri: "https://example.com/callback",
       state: "random_state",
     };
 
@@ -37,6 +37,4 @@ describe("getAuthenticationUrl", () => {
       "A code challenge is required. Generate one using .generatePKCE()."
     );
   });
-
-  // Add more test cases for different scenarios...
 });
