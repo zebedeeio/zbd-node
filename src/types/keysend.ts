@@ -21,21 +21,25 @@ export interface KeysendDataResponseType {
 export interface KeysendOptionsType {
   amount: string;
   pubkey: string;
-  tlvRecords: any[];
+  tlvRecords: any;
   metadata: any;
   callbackUrl: string;
 }
 
-export function isKeysendDataResponseType(data: any): data is KeysendDataResponseType {
-    return typeof data.keysendId === 'string' &&
-        typeof data.paymentId === 'string' &&
-        typeof data.transaction.id === 'string' &&
-        typeof data.transaction.walletId === 'string' &&
-        typeof data.transaction.type === 'string' &&
-        typeof data.transaction.totalAmount === 'string' &&
-        typeof data.transaction.fee === 'string' &&
-        typeof data.transaction.amount === 'string' &&
-        typeof data.transaction.description === 'string' &&
-        typeof data.transaction.status === 'string' &&
-        (data.transaction.confirmedAt === null || typeof data.transaction.confirmedAt === 'string');
+export function isKeysendDataResponseType(obj: any): obj is KeysendDataResponseType {
+  return obj &&
+      typeof obj.success === 'boolean' &&
+      obj.data &&
+      typeof obj.data.keysendId === 'string' &&
+      typeof obj.data.paymentId === 'string' &&
+      obj.data.transaction &&
+      typeof obj.data.transaction.id === 'string' &&
+      typeof obj.data.transaction.walletId === 'string' &&
+      typeof obj.data.transaction.type === 'string' &&
+      typeof obj.data.transaction.totalAmount === 'string' &&
+      typeof obj.data.transaction.fee === 'string' &&
+      typeof obj.data.transaction.amount === 'string' &&
+      typeof obj.data.transaction.description === 'string' &&
+      typeof obj.data.transaction.status === 'string' &&
+      (obj.data.transaction.confirmedAt === null || typeof obj.data.transaction.confirmedAt === 'string');
 }

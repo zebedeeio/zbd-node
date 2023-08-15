@@ -13,11 +13,10 @@ describe('Send Keysend Payment', () => {
       pubkey: "0332d57355d673e217238ce3e4be8491aa6b2a13f95494133ee243e57df1653ace",
       tlvRecords: [],
       metadata: {},
-      callbackUrl: "MOCK_CALLBACK_URL"
+      callbackUrl: "{{callbackURL}}"
     };
 
     const response = await ZBD.sendKeysendPayment(requestBody);
-    console.log(response)
 
     // Data Validation
     expect(response.success).toBe(true);
@@ -27,7 +26,24 @@ describe('Send Keysend Payment', () => {
 
 
 
-describe('createCharge error scenarios', () => {
+describe('Send Keysend error scenarios', () => {  
+
+  it('should fail keysend payment given an invalid pubkey', async () => {
+
+    const errorBody: KeysendOptionsType = {
+      amount: "1000",
+      pubkey: "23",
+      tlvRecords: [],
+      metadata: {},
+      callbackUrl: "{{callbackURL}}"
+    };
+    
+   await expect(ZBD.sendKeysendPayment(errorBody)).rejects.toMatchObject({
+    message: "Keysend payment failed.",
+    status: 400,
+   })  
+
+  });
     
 });
   
