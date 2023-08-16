@@ -13,8 +13,7 @@ describe('Initiate Internal Transfer', () => {
     };
 
     const response = await ZBD.internalTransfer(requestBody);
-    
-    console.log(response)
+  
 
     expect(response.success).toBe(true);
     expect(response.message).toBe('Internal Transfer done.');

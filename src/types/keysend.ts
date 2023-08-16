@@ -35,11 +35,11 @@ export function isKeysendDataResponseType(obj: any): obj is KeysendDataResponseT
       obj.data.transaction &&
       typeof obj.data.transaction.id === 'string' &&
       typeof obj.data.transaction.walletId === 'string' &&
-      typeof obj.data.transaction.type === 'string' &&
+      (typeof obj.data.transaction.type === 'string' || obj.data.transaction.type === undefined) &&
       typeof obj.data.transaction.totalAmount === 'string' &&
       typeof obj.data.transaction.fee === 'string' &&
       typeof obj.data.transaction.amount === 'string' &&
-      typeof obj.data.transaction.description === 'string' &&
+      (typeof obj.data.transaction.description === 'string' || obj.data.transaction.description === undefined) &&
       typeof obj.data.transaction.status === 'string' &&
-      (obj.data.transaction.confirmedAt === null || typeof obj.data.transaction.confirmedAt === 'string');
+      (obj.data.transaction.confirmedAt === undefined || typeof obj.data.transaction.confirmedAt === 'string');
 }

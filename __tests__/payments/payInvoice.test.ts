@@ -1,7 +1,7 @@
 import { TEST_API_KEY, TEST_RECEIVER_API_KEY } from '../../src/constants';
 import { zbd } from '../../src/zbd';
 import { InvoicePaymentDataResponseType, SendPaymentOptionsType, isInvoicePaymentDataResponseType } from '../../src/types/payments';
-import { ChargeOptionsType, isChargeResponseType } from '../../src/types';
+import { ChargeOptionsType, isChargeResponseType, isWalletDataResponseType } from '../../src/types';
 
 const payerZBD = new zbd(TEST_API_KEY);
 const receiverZBD = new zbd(TEST_RECEIVER_API_KEY)
@@ -97,6 +97,47 @@ describe('payInvoice', () => {
           status: 400
         });
       });
+
+       
+      // Integration test:
+    it('should throw an error when attempting to pay more than balance allows', async () => {
+      
+       
+    const chargePayload: ChargeOptionsType = {
+      expiresIn: 300,
+      amount: "500000000",
+      description: "My Charge Test",
+      internalId: "internalId",
+      callbackUrl: "https://my-website.com/zbd-callback"
+    };
+
+    // verify charge
+    const chargeResponse = await receiverZBD.createCharge(chargePayload);
+    
+    expect(isChargeResponseType(chargeResponse)).toBeTruthy();
+    expect(chargeResponse.success).toBe(true);
+    expect(chargeResponse.message).toBe("Charge created.");
+    expect(chargeResponse.data.amount).toBe(chargePayload.amount);
+    expect(chargeResponse.data.description).toBe(chargePayload.description);
+
+    // create payment and attempt to pay it
+    const paymentPayload: SendPaymentOptionsType = {
+      description: "Custom Payment Description",
+      internalId: "internalId",
+      invoice: chargeResponse.data.invoice.request,
+      callbackUrl: "https://my-website.com/callback/zbd",
+      amount: chargeResponse.data.amount
+    };
+
+    
+    await expect(payerZBD.sendPayment(paymentPayload)).rejects.toMatchObject({
+      message: "You do not have enough funds for this transaction and fees.",
+      status: 400,
+     })  
+
+      });
+
+
 
 
   });
