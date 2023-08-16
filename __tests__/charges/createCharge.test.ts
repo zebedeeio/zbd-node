@@ -17,6 +17,7 @@ describe('createCharge', () => {
     };
 
     const response = await ZBD.createCharge(payload);
+    console.log(response)
     
     expect(isChargeResponseType(response)).toBeTruthy();
     expect(response.success).toBe(true);
