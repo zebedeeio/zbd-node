@@ -37,7 +37,6 @@ describe('payInvoice', () => {
     };
 
     const response = await payerZBD.sendPayment(paymentPayload);
-    console.log(response)
     
     expect(isInvoicePaymentDataResponseType(response)).toBeTruthy();
     expect(response.success).toBe(true);
