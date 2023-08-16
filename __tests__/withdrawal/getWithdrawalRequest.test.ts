@@ -16,7 +16,6 @@ describe('getWithdrawalRequest', () => {
 
     // Data Validation
     expect(isGetWithdrawalRequestDataResponseType(responseData)).toBeTruthy();
-
   });
 
   describe('createWithdrawalRequest error scenarios', () => {

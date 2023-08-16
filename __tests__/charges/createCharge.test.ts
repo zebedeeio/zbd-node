@@ -25,7 +25,7 @@ describe('createCharge', () => {
     expect(response.data.description).toBe(payload.description);
   });
 
-  describe('fetchGamertagByUserID error scenarios', () => {
+  describe('createCharge error scenarios', () => {
     it('should throw an error given an erroneous payload (amount = 0)', async () => {
 
       const erroneousPayload: ChargeOptionsType = {

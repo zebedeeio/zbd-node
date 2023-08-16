@@ -4,6 +4,9 @@ export const API_URL = 'https://api.zebedee.io';
 // Test API Key
 export const TEST_API_KEY  = "8qJxln3JVJsQM0IOJhfnJopO0JSiLdlK"
 
+// Other Test API Key (Receiver)
+export const TEST_RECEIVER_API_KEY = "dESXgwgy7GziAbVA7AyN56uATloaburz"
+
 // Endpoints
 export const API = {
   // Wallet

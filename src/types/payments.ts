@@ -38,7 +38,7 @@ export function isInvoicePaymentDataResponseType(obj: any): obj is InvoicePaymen
     typeof obj.data.unit === 'string' &&
     typeof obj.data.amount === 'string' &&
     typeof obj.data.invoice === 'string' &&
-    typeof obj.data.preimage === 'string' &&
+    (typeof obj.data.preimage === 'string' || obj.data.preimage === null) &&
     typeof obj.data.internalId === 'string' &&
     typeof obj.data.processedAt === 'string' &&
     typeof obj.data.confirmedAt === 'string' &&

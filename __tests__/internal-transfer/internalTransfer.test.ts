@@ -7,7 +7,6 @@ const ZBD = new zbd(TEST_API_KEY);
 describe('Initiate Internal Transfer', () => {
 
   it('should initiate an internal transfer successfully', async () => {
-    // Mock parameters
     const requestBody: InternalTransferOptionsType = {
       amount: "1000",
       receiverWalletId: "b804ee02-ec0b-4fd4-b99f-1f2d3d0001a6"
