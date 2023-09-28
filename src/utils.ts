@@ -9,7 +9,7 @@ export const cleanup = (obj: any) => {
   }
 
   return newObj;
-}
+};
 
 export async function postData({
   url,
@@ -23,7 +23,7 @@ export async function postData({
   const response = await fetch(url, {
     method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       ...headers,
     },
     body: JSON.stringify(cleanup(body)),
@@ -33,9 +33,8 @@ export async function postData({
     const errorBody = await response.json();
     const error = {
       status: response.status,
-      message: errorBody.message || 'API request failed',
+      message: errorBody.message || "API request failed",
     };
-    
 
     throw error;
   }
@@ -56,18 +55,17 @@ export async function patchData({
   const response = await fetch(url, {
     method: "PATCH",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       ...headers,
     },
     body: JSON.stringify(cleanup(body)),
   });
 
   if (!response.ok) {
-
     const errorBody = await response.json();
     const error = {
       status: response.status,
-      message: errorBody.message || 'API request failed',
+      message: errorBody.message || "API request failed",
     };
 
     throw error;
@@ -87,19 +85,17 @@ export async function getData({
   const response = await fetch(url, {
     method: "GET",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       ...headers,
     },
   });
 
   if (!response.ok) {
-
     const errorBody = await response.json();
     const error = {
       status: response.status,
-      message: errorBody.message || 'API request failed',
+      message: errorBody.message || "API request failed",
     };
-
     throw error;
   }
 

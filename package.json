@@ -40,7 +40,7 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@zbd/node": "^0.6.2",
+    "@zbd/node": "^0.6.3",
     "node-fetch": "^3.3.1"
   }
 }
