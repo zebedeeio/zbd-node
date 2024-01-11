@@ -38,7 +38,7 @@ class zbd {
   apiBaseUrl: string;
   apiCoreHeaders: {apikey: string };  
 
-  constructor(apiKey: string, apiBaseUrl?: string = API_URL) {
+  constructor(apiKey: string, apiBaseUrl: string = API_URL) {
     this.apiBaseUrl = apiBaseUrl;
     this.apiCoreHeaders = { apikey: apiKey };
   }
