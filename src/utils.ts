@@ -30,14 +30,7 @@ export async function postData({
   });
 
   if (!response.ok) {
-    const errorBody = await response.json();
-    const error = {
-      status: response.status,
-      message: errorBody.message || 'API request failed',
-    };
-    
-
-    throw error;
+    throw (await makeError(response));
   }
 
   const result = await response.json();
@@ -63,14 +56,7 @@ export async function patchData({
   });
 
   if (!response.ok) {
-
-    const errorBody = await response.json();
-    const error = {
-      status: response.status,
-      message: errorBody.message || 'API request failed',
-    };
-
-    throw error;
+    throw (await makeError(response));
   }
 
   const result = await response.json();
@@ -93,16 +79,23 @@ export async function getData({
   });
 
   if (!response.ok) {
-
-    const errorBody = await response.json();
-    const error = {
-      status: response.status,
-      message: errorBody.message || 'API request failed',
-    };
-
-    throw error;
+    throw (await makeError(response));
   }
 
   const result = await response.json();
   return result;
+}
+
+async function makeError(response: Response) {
+  let errorBody: any;
+  try {
+    errorBody = await response.json();
+  } catch (_) {
+    errorBody = null;
+  }
+
+  return {
+    status: response.status,
+    message: errorBody?.message || "API request failed",
+  };
 }
