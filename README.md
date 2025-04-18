@@ -1,3 +1,29 @@
+> ⚠️ **DEPRECATION NOTICE – PLEASE READ**
+>
+> This SDK (`@zbd/node`) is no longer actively maintained.
+>
+> While it will continue to function, it will **not receive updates, new features, or long-term support (LTS)**. As we roll out **major version upgrades (v2, v3, etc.)** to our platform, this SDK **will not support them**.
+>
+> ### 👉 We strongly recommend migrating to our new official SDK:
+>
+> **New SDK:** [`@zbddev/payments-sdk`](https://www.npmjs.com/package/@zbddev/payments-sdk)  
+> **GitHub:** [zbd-payments-typescript-sdk](https://github.com/zebedeeio/zbd-payments-typescript-sdk)
+>
+> To install:
+>
+> ```bash
+> pnpm install @zbddev/payments-sdk
+> ```
+>
+> The new SDK offers:
+> - Full **TypeScript** support
+> - Actively maintained and fully documented APIs
+> - Ongoing **LTS support** and compatibility with new platform versions
+> - Improved architecture, modularity, and DX
+>
+> **Note:** We will not address issues or accept PRs for this SDK going forward.  
+> Please migrate as soon as possible to avoid future integration issues.
+
 <h1 align='center'>ZBD Node.js SDK</h1>
 
 <div align='center'>
